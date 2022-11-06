@@ -3,11 +3,11 @@
     "getUpdates": {
       "name": "getUpdates",
       "href": "https://core.telegram.org/bots/api#getupdates",
+      "description": [
+        "Use this method to receive incoming updates using long polling (wiki). Returns an Array of Update objects."
+      ],
       "returns": [
         "Array of Update"
-      ],
-      "description": [
-        "Use this method to receive incoming updates using long polling (wiki). An Array of Update objects is returned."
       ],
       "fields": [
         {
@@ -47,12 +47,12 @@
     "setWebhook": {
       "name": "setWebhook",
       "href": "https://core.telegram.org/bots/api#setwebhook",
+      "description": [
+        "Use this method to specify a URL and receive incoming updates via an outgoing webhook. Whenever there is an update for the bot, we will send an HTTPS POST request to the specified URL, containing a JSON-serialized Update. In case of an unsuccessful request, we will give up after a reasonable amount of attempts. Returns True on success.",
+        "If you'd like to make sure that the webhook was set by you, you can specify secret data in the parameter secret_token. If specified, the request will contain a header \"X-Telegram-Bot-Api-Secret-Token\" with the secret token as content."
+      ],
       "returns": [
         "Boolean"
-      ],
-      "description": [
-        "Use this method to specify a url and receive incoming updates via an outgoing webhook. Whenever there is an update for the bot, we will send an HTTPS POST request to the specified url, containing a JSON-serialized Update. In case of an unsuccessful request, we will give up after a reasonable amount of attempts. Returns True on success.",
-        "If you'd like to make sure that the Webhook request comes from Telegram, we recommend using a secret path in the URL, e.g. https://www.example.com/<token>. Since nobody else knows your bot's token, you can be pretty sure it's us."
       ],
       "fields": [
         {
@@ -61,7 +61,7 @@
             "String"
           ],
           "required": true,
-          "description": "HTTPS url to send updates to. Use an empty string to remove webhook integration"
+          "description": "HTTPS URL to send updates to. Use an empty string to remove webhook integration"
         },
         {
           "name": "certificate",
@@ -85,7 +85,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery, 1-100. Defaults to 40. Use lower values to limit the load on your bot's server, and higher values to increase your bot's throughput."
+          "description": "The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery, 1-100. Defaults to 40. Use lower values to limit the load on your bot's server, and higher values to increase your bot's throughput."
         },
         {
           "name": "allowed_updates",
@@ -102,17 +102,25 @@
           ],
           "required": false,
           "description": "Pass True to drop all pending updates"
+        },
+        {
+          "name": "secret_token",
+          "types": [
+            "String"
+          ],
+          "required": false,
+          "description": "A secret token to be sent in a header \"X-Telegram-Bot-Api-Secret-Token\" in every webhook request, 1-256 characters. Only characters A-Z, a-z, 0-9, _ and - are allowed. The header is useful to ensure that the request comes from a webhook set by you."
         }
       ]
     },
     "deleteWebhook": {
       "name": "deleteWebhook",
       "href": "https://core.telegram.org/bots/api#deletewebhook",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to remove webhook integration if you decide to switch back to getUpdates. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -128,51 +136,51 @@
     "getWebhookInfo": {
       "name": "getWebhookInfo",
       "href": "https://core.telegram.org/bots/api#getwebhookinfo",
-      "returns": [
-        "WebhookInfo"
-      ],
       "description": [
         "Use this method to get current webhook status. Requires no parameters. On success, returns a WebhookInfo object. If the bot is using getUpdates, will return an object with the url field empty."
+      ],
+      "returns": [
+        "WebhookInfo"
       ]
     },
     "getMe": {
       "name": "getMe",
       "href": "https://core.telegram.org/bots/api#getme",
-      "returns": [
-        "User"
-      ],
       "description": [
         "A simple method for testing your bot's authentication token. Requires no parameters. Returns basic information about the bot in form of a User object."
+      ],
+      "returns": [
+        "User"
       ]
     },
     "logOut": {
       "name": "logOut",
       "href": "https://core.telegram.org/bots/api#logout",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to log out from the cloud Bot API server before launching the bot locally. You must log out the bot before running it locally, otherwise there is no guarantee that the bot will receive updates. After a successful call, you can immediately log in on a local server, but will not be able to log in back to the cloud Bot API server for 10 minutes. Returns True on success. Requires no parameters."
+      ],
+      "returns": [
+        "Boolean"
       ]
     },
     "close": {
       "name": "close",
       "href": "https://core.telegram.org/bots/api#close",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to close the bot instance before moving it from one local server to another. You need to delete the webhook before calling this method to ensure that the bot isn't launched again after server restart. The method will return error 429 in the first 10 minutes after the bot is launched. Returns True on success. Requires no parameters."
+      ],
+      "returns": [
+        "Boolean"
       ]
     },
     "sendMessage": {
       "name": "sendMessage",
       "href": "https://core.telegram.org/bots/api#sendmessage",
-      "returns": [
-        "Message"
-      ],
       "description": [
         "Use this method to send text messages. On success, the sent Message is returned."
+      ],
+      "returns": [
+        "Message"
       ],
       "fields": [
         {
@@ -183,6 +191,14 @@
           ],
           "required": true,
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only"
         },
         {
           "name": "text",
@@ -246,7 +262,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "name": "reply_markup",
@@ -264,11 +280,11 @@
     "forwardMessage": {
       "name": "forwardMessage",
       "href": "https://core.telegram.org/bots/api#forwardmessage",
-      "returns": [
-        "Message"
-      ],
       "description": [
         "Use this method to forward messages of any kind. Service messages can't be forwarded. On success, the sent Message is returned."
+      ],
+      "returns": [
+        "Message"
       ],
       "fields": [
         {
@@ -279,6 +295,14 @@
           ],
           "required": true,
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only"
         },
         {
           "name": "from_chat_id",
@@ -318,11 +342,11 @@
     "copyMessage": {
       "name": "copyMessage",
       "href": "https://core.telegram.org/bots/api#copymessage",
+      "description": [
+        "Use this method to copy messages of any kind. Service messages and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success."
+      ],
       "returns": [
         "MessageId"
-      ],
-      "description": [
-        "Use this method to copy messages of any kind. Service messages and invoice messages can't be copied. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success."
       ],
       "fields": [
         {
@@ -333,6 +357,14 @@
           ],
           "required": true,
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only"
         },
         {
           "name": "from_chat_id",
@@ -405,7 +437,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "name": "reply_markup",
@@ -423,11 +455,11 @@
     "sendPhoto": {
       "name": "sendPhoto",
       "href": "https://core.telegram.org/bots/api#sendphoto",
-      "returns": [
-        "Message"
-      ],
       "description": [
         "Use this method to send photos. On success, the sent Message is returned."
+      ],
+      "returns": [
+        "Message"
       ],
       "fields": [
         {
@@ -440,13 +472,21 @@
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
         },
         {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only"
+        },
+        {
           "name": "photo",
           "types": [
             "InputFile",
             "String"
           ],
           "required": true,
-          "description": "Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20. More info on Sending Files: https://core.telegram.org/bots/api#sending-files"
+          "description": "Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "caption",
@@ -502,7 +542,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "name": "reply_markup",
@@ -520,12 +560,12 @@
     "sendAudio": {
       "name": "sendAudio",
       "href": "https://core.telegram.org/bots/api#sendaudio",
-      "returns": [
-        "Message"
-      ],
       "description": [
         "Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.",
         "For sending voice messages, use the sendVoice method instead."
+      ],
+      "returns": [
+        "Message"
       ],
       "fields": [
         {
@@ -538,13 +578,21 @@
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
         },
         {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only"
+        },
+        {
           "name": "audio",
           "types": [
             "InputFile",
             "String"
           ],
           "required": true,
-          "description": "Audio file to send. Pass a file_id as String to send an audio file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an audio file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files: https://core.telegram.org/bots/api#sending-files"
+          "description": "Audio file to send. Pass a file_id as String to send an audio file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an audio file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "caption",
@@ -601,7 +649,7 @@
             "String"
           ],
           "required": false,
-          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files: https://core.telegram.org/bots/api#sending-files"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "disable_notification",
@@ -633,7 +681,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "name": "reply_markup",
@@ -651,11 +699,11 @@
     "sendDocument": {
       "name": "sendDocument",
       "href": "https://core.telegram.org/bots/api#senddocument",
-      "returns": [
-        "Message"
-      ],
       "description": [
         "Use this method to send general files. On success, the sent Message is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future."
+      ],
+      "returns": [
+        "Message"
       ],
       "fields": [
         {
@@ -668,13 +716,21 @@
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
         },
         {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only"
+        },
+        {
           "name": "document",
           "types": [
             "InputFile",
             "String"
           ],
           "required": true,
-          "description": "File to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files: https://core.telegram.org/bots/api#sending-files"
+          "description": "File to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "thumb",
@@ -683,7 +739,7 @@
             "String"
           ],
           "required": false,
-          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files: https://core.telegram.org/bots/api#sending-files"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "caption",
@@ -747,7 +803,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "name": "reply_markup",
@@ -765,11 +821,11 @@
     "sendVideo": {
       "name": "sendVideo",
       "href": "https://core.telegram.org/bots/api#sendvideo",
+      "description": [
+        "Use this method to send video files, Telegram clients support MPEG4 videos (other formats may be sent as Document). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future."
+      ],
       "returns": [
         "Message"
-      ],
-      "description": [
-        "Use this method to send video files, Telegram clients support mp4 videos (other formats may be sent as Document). On success, the sent Message is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future."
       ],
       "fields": [
         {
@@ -782,13 +838,21 @@
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
         },
         {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only"
+        },
+        {
           "name": "video",
           "types": [
             "InputFile",
             "String"
           ],
           "required": true,
-          "description": "Video to send. Pass a file_id as String to send a video that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a video from the Internet, or upload a new video using multipart/form-data. More info on Sending Files: https://core.telegram.org/bots/api#sending-files"
+          "description": "Video to send. Pass a file_id as String to send a video that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a video from the Internet, or upload a new video using multipart/form-data. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "duration",
@@ -821,7 +885,7 @@
             "String"
           ],
           "required": false,
-          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files: https://core.telegram.org/bots/api#sending-files"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "caption",
@@ -853,7 +917,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the uploaded video is suitable for streaming"
+          "description": "Pass True if the uploaded video is suitable for streaming"
         },
         {
           "name": "disable_notification",
@@ -885,7 +949,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "name": "reply_markup",
@@ -903,11 +967,11 @@
     "sendAnimation": {
       "name": "sendAnimation",
       "href": "https://core.telegram.org/bots/api#sendanimation",
-      "returns": [
-        "Message"
-      ],
       "description": [
         "Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future."
+      ],
+      "returns": [
+        "Message"
       ],
       "fields": [
         {
@@ -920,13 +984,21 @@
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
         },
         {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only"
+        },
+        {
           "name": "animation",
           "types": [
             "InputFile",
             "String"
           ],
           "required": true,
-          "description": "Animation to send. Pass a file_id as String to send an animation that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an animation from the Internet, or upload a new animation using multipart/form-data. More info on Sending Files: https://core.telegram.org/bots/api#sending-files"
+          "description": "Animation to send. Pass a file_id as String to send an animation that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an animation from the Internet, or upload a new animation using multipart/form-data. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "duration",
@@ -959,7 +1031,7 @@
             "String"
           ],
           "required": false,
-          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files: https://core.telegram.org/bots/api#sending-files"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "caption",
@@ -1015,7 +1087,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "name": "reply_markup",
@@ -1033,11 +1105,11 @@
     "sendVoice": {
       "name": "sendVoice",
       "href": "https://core.telegram.org/bots/api#sendvoice",
-      "returns": [
-        "Message"
-      ],
       "description": [
         "Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS (other formats may be sent as Audio or Document). On success, the sent Message is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future."
+      ],
+      "returns": [
+        "Message"
       ],
       "fields": [
         {
@@ -1050,13 +1122,21 @@
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
         },
         {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only"
+        },
+        {
           "name": "voice",
           "types": [
             "InputFile",
             "String"
           ],
           "required": true,
-          "description": "Audio file to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files: https://core.telegram.org/bots/api#sending-files"
+          "description": "Audio file to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "caption",
@@ -1120,7 +1200,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "name": "reply_markup",
@@ -1138,11 +1218,11 @@
     "sendVideoNote": {
       "name": "sendVideoNote",
       "href": "https://core.telegram.org/bots/api#sendvideonote",
+      "description": [
+        "As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned."
+      ],
       "returns": [
         "Message"
-      ],
-      "description": [
-        "As of v.4.0, Telegram clients support rounded square mp4 videos of up to 1 minute long. Use this method to send video messages. On success, the sent Message is returned."
       ],
       "fields": [
         {
@@ -1155,13 +1235,21 @@
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
         },
         {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only"
+        },
+        {
           "name": "video_note",
           "types": [
             "InputFile",
             "String"
           ],
           "required": true,
-          "description": "Video note to send. Pass a file_id as String to send a video note that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. More info on Sending Files: https://core.telegram.org/bots/api#sending-files. Sending video notes by a URL is currently unsupported"
+          "description": "Video note to send. Pass a file_id as String to send a video note that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. More information on Sending Files: https://core.telegram.org/bots/api#sending-files. Sending video notes by a URL is currently unsupported"
         },
         {
           "name": "duration",
@@ -1186,7 +1274,7 @@
             "String"
           ],
           "required": false,
-          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files: https://core.telegram.org/bots/api#sending-files"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "disable_notification",
@@ -1218,7 +1306,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "name": "reply_markup",
@@ -1236,11 +1324,11 @@
     "sendMediaGroup": {
       "name": "sendMediaGroup",
       "href": "https://core.telegram.org/bots/api#sendmediagroup",
-      "returns": [
-        "Array of Message"
-      ],
       "description": [
         "Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an array of Messages that were sent is returned."
+      ],
+      "returns": [
+        "Array of Message"
       ],
       "fields": [
         {
@@ -1251,6 +1339,14 @@
           ],
           "required": true,
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only"
         },
         {
           "name": "media",
@@ -1293,18 +1389,18 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         }
       ]
     },
     "sendLocation": {
       "name": "sendLocation",
       "href": "https://core.telegram.org/bots/api#sendlocation",
-      "returns": [
-        "Message"
-      ],
       "description": [
         "Use this method to send point on the map. On success, the sent Message is returned."
+      ],
+      "returns": [
+        "Message"
       ],
       "fields": [
         {
@@ -1315,6 +1411,14 @@
           ],
           "required": true,
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only"
         },
         {
           "name": "latitude",
@@ -1394,7 +1498,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "name": "reply_markup",
@@ -1412,12 +1516,12 @@
     "editMessageLiveLocation": {
       "name": "editMessageLiveLocation",
       "href": "https://core.telegram.org/bots/api#editmessagelivelocation",
+      "description": [
+        "Use this method to edit live location messages. A location can be edited until its live_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned."
+      ],
       "returns": [
         "Message",
         "Boolean"
-      ],
-      "description": [
-        "Use this method to edit live location messages. A location can be edited until its live_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned."
       ],
       "fields": [
         {
@@ -1483,7 +1587,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified."
+          "description": "The maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified."
         },
         {
           "name": "reply_markup",
@@ -1498,12 +1602,12 @@
     "stopMessageLiveLocation": {
       "name": "stopMessageLiveLocation",
       "href": "https://core.telegram.org/bots/api#stopmessagelivelocation",
+      "description": [
+        "Use this method to stop updating a live location message before live_period expires. On success, if the message is not an inline message, the edited Message is returned, otherwise True is returned."
+      ],
       "returns": [
         "Message",
         "Boolean"
-      ],
-      "description": [
-        "Use this method to stop updating a live location message before live_period expires. On success, if the message is not an inline message, the edited Message is returned, otherwise True is returned."
       ],
       "fields": [
         {
@@ -1544,11 +1648,11 @@
     "sendVenue": {
       "name": "sendVenue",
       "href": "https://core.telegram.org/bots/api#sendvenue",
-      "returns": [
-        "Message"
-      ],
       "description": [
         "Use this method to send information about a venue. On success, the sent Message is returned."
+      ],
+      "returns": [
+        "Message"
       ],
       "fields": [
         {
@@ -1559,6 +1663,14 @@
           ],
           "required": true,
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only"
         },
         {
           "name": "latitude",
@@ -1654,7 +1766,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "name": "reply_markup",
@@ -1672,11 +1784,11 @@
     "sendContact": {
       "name": "sendContact",
       "href": "https://core.telegram.org/bots/api#sendcontact",
-      "returns": [
-        "Message"
-      ],
       "description": [
         "Use this method to send phone contacts. On success, the sent Message is returned."
+      ],
+      "returns": [
+        "Message"
       ],
       "fields": [
         {
@@ -1687,6 +1799,14 @@
           ],
           "required": true,
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only"
         },
         {
           "name": "phone_number",
@@ -1750,7 +1870,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "name": "reply_markup",
@@ -1761,18 +1881,18 @@
             "ForceReply"
           ],
           "required": false,
-          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove keyboard or to force a reply from the user."
+          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
         }
       ]
     },
     "sendPoll": {
       "name": "sendPoll",
       "href": "https://core.telegram.org/bots/api#sendpoll",
-      "returns": [
-        "Message"
-      ],
       "description": [
         "Use this method to send a native poll. On success, the sent Message is returned."
+      ],
+      "returns": [
+        "Message"
       ],
       "fields": [
         {
@@ -1783,6 +1903,14 @@
           ],
           "required": true,
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only"
         },
         {
           "name": "question",
@@ -1878,7 +2006,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the poll needs to be immediately closed. This can be useful for poll preview."
+          "description": "Pass True if the poll needs to be immediately closed. This can be useful for poll preview."
         },
         {
           "name": "disable_notification",
@@ -1910,7 +2038,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "name": "reply_markup",
@@ -1928,11 +2056,11 @@
     "sendDice": {
       "name": "sendDice",
       "href": "https://core.telegram.org/bots/api#senddice",
-      "returns": [
-        "Message"
-      ],
       "description": [
         "Use this method to send an animated emoji that will display a random value. On success, the sent Message is returned."
+      ],
+      "returns": [
+        "Message"
       ],
       "fields": [
         {
@@ -1943,6 +2071,14 @@
           ],
           "required": true,
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only"
         },
         {
           "name": "emoji",
@@ -1982,7 +2118,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "name": "reply_markup",
@@ -2000,12 +2136,12 @@
     "sendChatAction": {
       "name": "sendChatAction",
       "href": "https://core.telegram.org/bots/api#sendchataction",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method when you need to tell the user that something is happening on the bot's side. The status is set for 5 seconds or less (when a message arrives from your bot, Telegram clients clear its typing status). Returns True on success.",
         "We only recommend using this method when a response from the bot will take a noticeable amount of time to arrive."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -2030,11 +2166,11 @@
     "getUserProfilePhotos": {
       "name": "getUserProfilePhotos",
       "href": "https://core.telegram.org/bots/api#getuserprofilephotos",
-      "returns": [
-        "UserProfilePhotos"
-      ],
       "description": [
         "Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object."
+      ],
+      "returns": [
+        "UserProfilePhotos"
       ],
       "fields": [
         {
@@ -2066,12 +2202,12 @@
     "getFile": {
       "name": "getFile",
       "href": "https://core.telegram.org/bots/api#getfile",
+      "description": [
+        "Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot<token>/<file_path>, where <file_path> is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.",
+        "Note: This function may not preserve the original file name and MIME type. You should save the file's MIME type and name (if available) when the File object is received."
+      ],
       "returns": [
         "File"
-      ],
-      "description": [
-        "Use this method to get basic info about a file and prepare it for downloading. For the moment, bots can download files of up to 20MB in size. On success, a File object is returned. The file can then be downloaded via the link https://api.telegram.org/file/bot<token>/<file_path>, where <file_path> is taken from the response. It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.",
-        "Note: This function may not preserve the original file name and MIME type. You should save the file's MIME type and name (if available) when the File object is received."
       ],
       "fields": [
         {
@@ -2080,18 +2216,18 @@
             "String"
           ],
           "required": true,
-          "description": "File identifier to get info about"
+          "description": "File identifier to get information about"
         }
       ]
     },
     "banChatMember": {
       "name": "banChatMember",
       "href": "https://core.telegram.org/bots/api#banchatmember",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to ban a user in a group, a supergroup or a channel. In the case of supergroups and channels, the user will not be able to return to the chat on their own using invite links, etc., unless unbanned first. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -2132,11 +2268,11 @@
     "unbanChatMember": {
       "name": "unbanChatMember",
       "href": "https://core.telegram.org/bots/api#unbanchatmember",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to unban a previously banned user in a supergroup or channel. The user will not return to the group or channel automatically, but will be able to join via link, etc. The bot must be an administrator for this to work. By default, this method guarantees that after the call the user is not a member of the chat, but will be able to join it. So if the user is a member of the chat they will also be removed from the chat. If you don't want this, use the parameter only_if_banned. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -2169,11 +2305,11 @@
     "restrictChatMember": {
       "name": "restrictChatMember",
       "href": "https://core.telegram.org/bots/api#restrictchatmember",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to restrict a user in a supergroup. The bot must be an administrator in the supergroup for this to work and must have the appropriate administrator rights. Pass True for all permissions to lift restrictions from a user. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -2214,11 +2350,11 @@
     "promoteChatMember": {
       "name": "promoteChatMember",
       "href": "https://core.telegram.org/bots/api#promotechatmember",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to promote or demote a user in a supergroup or a channel. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Pass False for all boolean parameters to demote a user. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -2244,7 +2380,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the administrator's presence in the chat is hidden"
+          "description": "Pass True if the administrator's presence in the chat is hidden"
         },
         {
           "name": "can_manage_chat",
@@ -2252,7 +2388,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
+          "description": "Pass True if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
         },
         {
           "name": "can_post_messages",
@@ -2260,7 +2396,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the administrator can create channel posts, channels only"
+          "description": "Pass True if the administrator can create channel posts, channels only"
         },
         {
           "name": "can_edit_messages",
@@ -2268,7 +2404,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the administrator can edit messages of other users and can pin messages, channels only"
+          "description": "Pass True if the administrator can edit messages of other users and can pin messages, channels only"
         },
         {
           "name": "can_delete_messages",
@@ -2276,15 +2412,15 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the administrator can delete messages of other users"
+          "description": "Pass True if the administrator can delete messages of other users"
         },
         {
-          "name": "can_manage_voice_chats",
+          "name": "can_manage_video_chats",
           "types": [
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the administrator can manage voice chats"
+          "description": "Pass True if the administrator can manage video chats"
         },
         {
           "name": "can_restrict_members",
@@ -2292,7 +2428,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the administrator can restrict, ban or unban chat members"
+          "description": "Pass True if the administrator can restrict, ban or unban chat members"
         },
         {
           "name": "can_promote_members",
@@ -2300,7 +2436,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that he has promoted, directly or indirectly (promoted by administrators that were appointed by him)"
+          "description": "Pass True if the administrator can add new administrators with a subset of their own privileges or demote administrators that he has promoted, directly or indirectly (promoted by administrators that were appointed by him)"
         },
         {
           "name": "can_change_info",
@@ -2308,7 +2444,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the administrator can change chat title, photo and other settings"
+          "description": "Pass True if the administrator can change chat title, photo and other settings"
         },
         {
           "name": "can_invite_users",
@@ -2316,7 +2452,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the administrator can invite new users to the chat"
+          "description": "Pass True if the administrator can invite new users to the chat"
         },
         {
           "name": "can_pin_messages",
@@ -2324,18 +2460,26 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the administrator can pin messages, supergroups only"
+          "description": "Pass True if the administrator can pin messages, supergroups only"
+        },
+        {
+          "name": "can_manage_topics",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Pass True if the user is allowed to create, rename, close, and reopen forum topics, supergroups only"
         }
       ]
     },
     "setChatAdministratorCustomTitle": {
       "name": "setChatAdministratorCustomTitle",
       "href": "https://core.telegram.org/bots/api#setchatadministratorcustomtitle",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to set a custom title for an administrator in a supergroup promoted by the bot. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -2368,11 +2512,11 @@
     "banChatSenderChat": {
       "name": "banChatSenderChat",
       "href": "https://core.telegram.org/bots/api#banchatsenderchat",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to ban a channel chat in a supergroup or a channel. Until the chat is unbanned, the owner of the banned chat won't be able to send messages on behalf of any of their channels. The bot must be an administrator in the supergroup or channel for this to work and must have the appropriate administrator rights. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -2397,11 +2541,11 @@
     "unbanChatSenderChat": {
       "name": "unbanChatSenderChat",
       "href": "https://core.telegram.org/bots/api#unbanchatsenderchat",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to unban a previously banned channel chat in a supergroup or channel. The bot must be an administrator for this to work and must have the appropriate administrator rights. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -2426,11 +2570,11 @@
     "setChatPermissions": {
       "name": "setChatPermissions",
       "href": "https://core.telegram.org/bots/api#setchatpermissions",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to set default chat permissions for all members. The bot must be an administrator in the group or a supergroup for this to work and must have the can_restrict_members administrator rights. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -2455,11 +2599,11 @@
     "exportChatInviteLink": {
       "name": "exportChatInviteLink",
       "href": "https://core.telegram.org/bots/api#exportchatinvitelink",
-      "returns": [
-        "String"
-      ],
       "description": [
         "Use this method to generate a new primary invite link for a chat; any previously generated primary link is revoked. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the new invite link as String on success."
+      ],
+      "returns": [
+        "String"
       ],
       "fields": [
         {
@@ -2476,11 +2620,11 @@
     "createChatInviteLink": {
       "name": "createChatInviteLink",
       "href": "https://core.telegram.org/bots/api#createchatinvitelink",
-      "returns": [
-        "ChatInviteLink"
-      ],
       "description": [
         "Use this method to create an additional invite link for a chat. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. The link can be revoked using the method revokeChatInviteLink. Returns the new invite link as ChatInviteLink object."
+      ],
+      "returns": [
+        "ChatInviteLink"
       ],
       "fields": [
         {
@@ -2514,7 +2658,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999"
+          "description": "The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999"
         },
         {
           "name": "creates_join_request",
@@ -2529,11 +2673,11 @@
     "editChatInviteLink": {
       "name": "editChatInviteLink",
       "href": "https://core.telegram.org/bots/api#editchatinvitelink",
-      "returns": [
-        "ChatInviteLink"
-      ],
       "description": [
         "Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the edited invite link as a ChatInviteLink object."
+      ],
+      "returns": [
+        "ChatInviteLink"
       ],
       "fields": [
         {
@@ -2575,7 +2719,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999"
+          "description": "The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999"
         },
         {
           "name": "creates_join_request",
@@ -2590,11 +2734,11 @@
     "revokeChatInviteLink": {
       "name": "revokeChatInviteLink",
       "href": "https://core.telegram.org/bots/api#revokechatinvitelink",
-      "returns": [
-        "ChatInviteLink"
-      ],
       "description": [
         "Use this method to revoke an invite link created by the bot. If the primary link is revoked, a new link is automatically generated. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the revoked invite link as ChatInviteLink object."
+      ],
+      "returns": [
+        "ChatInviteLink"
       ],
       "fields": [
         {
@@ -2619,11 +2763,11 @@
     "approveChatJoinRequest": {
       "name": "approveChatJoinRequest",
       "href": "https://core.telegram.org/bots/api#approvechatjoinrequest",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to approve a chat join request. The bot must be an administrator in the chat for this to work and must have the can_invite_users administrator right. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -2648,11 +2792,11 @@
     "declineChatJoinRequest": {
       "name": "declineChatJoinRequest",
       "href": "https://core.telegram.org/bots/api#declinechatjoinrequest",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to decline a chat join request. The bot must be an administrator in the chat for this to work and must have the can_invite_users administrator right. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -2677,11 +2821,11 @@
     "setChatPhoto": {
       "name": "setChatPhoto",
       "href": "https://core.telegram.org/bots/api#setchatphoto",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to set a new profile photo for the chat. Photos can't be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -2706,11 +2850,11 @@
     "deleteChatPhoto": {
       "name": "deleteChatPhoto",
       "href": "https://core.telegram.org/bots/api#deletechatphoto",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to delete a chat photo. Photos can't be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -2727,11 +2871,11 @@
     "setChatTitle": {
       "name": "setChatTitle",
       "href": "https://core.telegram.org/bots/api#setchattitle",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to change the title of a chat. Titles can't be changed for private chats. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -2749,18 +2893,18 @@
             "String"
           ],
           "required": true,
-          "description": "New chat title, 1-255 characters"
+          "description": "New chat title, 1-128 characters"
         }
       ]
     },
     "setChatDescription": {
       "name": "setChatDescription",
       "href": "https://core.telegram.org/bots/api#setchatdescription",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to change the description of a group, a supergroup or a channel. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -2785,11 +2929,11 @@
     "pinChatMessage": {
       "name": "pinChatMessage",
       "href": "https://core.telegram.org/bots/api#pinchatmessage",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to add a message to the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -2815,18 +2959,18 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if it is not necessary to send a notification to all chat members about the new pinned message. Notifications are always disabled in channels and private chats."
+          "description": "Pass True if it is not necessary to send a notification to all chat members about the new pinned message. Notifications are always disabled in channels and private chats."
         }
       ]
     },
     "unpinChatMessage": {
       "name": "unpinChatMessage",
       "href": "https://core.telegram.org/bots/api#unpinchatmessage",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to remove a message from the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -2851,11 +2995,11 @@
     "unpinAllChatMessages": {
       "name": "unpinAllChatMessages",
       "href": "https://core.telegram.org/bots/api#unpinallchatmessages",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to clear the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -2872,11 +3016,11 @@
     "leaveChat": {
       "name": "leaveChat",
       "href": "https://core.telegram.org/bots/api#leavechat",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method for your bot to leave a group, supergroup or channel. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -2893,11 +3037,11 @@
     "getChat": {
       "name": "getChat",
       "href": "https://core.telegram.org/bots/api#getchat",
-      "returns": [
-        "Chat"
-      ],
       "description": [
         "Use this method to get up to date information about the chat (current name of the user for one-on-one conversations, current username of a user, group or channel, etc.). Returns a Chat object on success."
+      ],
+      "returns": [
+        "Chat"
       ],
       "fields": [
         {
@@ -2914,11 +3058,11 @@
     "getChatAdministrators": {
       "name": "getChatAdministrators",
       "href": "https://core.telegram.org/bots/api#getchatadministrators",
+      "description": [
+        "Use this method to get a list of administrators in a chat, which aren't bots. Returns an Array of ChatMember objects."
+      ],
       "returns": [
         "Array of ChatMember"
-      ],
-      "description": [
-        "Use this method to get a list of administrators in a chat. On success, returns an Array of ChatMember objects that contains information about all chat administrators except other bots. If the chat is a group or a supergroup and no administrators were appointed, only the creator will be returned."
       ],
       "fields": [
         {
@@ -2935,11 +3079,11 @@
     "getChatMemberCount": {
       "name": "getChatMemberCount",
       "href": "https://core.telegram.org/bots/api#getchatmembercount",
-      "returns": [
-        "Integer"
-      ],
       "description": [
         "Use this method to get the number of members in a chat. Returns Int on success."
+      ],
+      "returns": [
+        "Integer"
       ],
       "fields": [
         {
@@ -2956,11 +3100,11 @@
     "getChatMember": {
       "name": "getChatMember",
       "href": "https://core.telegram.org/bots/api#getchatmember",
-      "returns": [
-        "ChatMember"
-      ],
       "description": [
         "Use this method to get information about a member of a chat. Returns a ChatMember object on success."
+      ],
+      "returns": [
+        "ChatMember"
       ],
       "fields": [
         {
@@ -2985,11 +3129,11 @@
     "setChatStickerSet": {
       "name": "setChatStickerSet",
       "href": "https://core.telegram.org/bots/api#setchatstickerset",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to set a new group sticker set for a supergroup. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Use the field can_set_sticker_set optionally returned in getChat requests to check if the bot can use this method. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -3014,11 +3158,11 @@
     "deleteChatStickerSet": {
       "name": "deleteChatStickerSet",
       "href": "https://core.telegram.org/bots/api#deletechatstickerset",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to delete a group sticker set from a supergroup. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Use the field can_set_sticker_set optionally returned in getChat requests to check if the bot can use this method. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -3032,14 +3176,230 @@
         }
       ]
     },
-    "answerCallbackQuery": {
-      "name": "answerCallbackQuery",
-      "href": "https://core.telegram.org/bots/api#answercallbackquery",
+    "getForumTopicIconStickers": {
+      "name": "getForumTopicIconStickers",
+      "href": "https://core.telegram.org/bots/api#getforumtopiciconstickers",
+      "description": [
+        "Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no parameters. Returns an Array of Sticker objects."
+      ],
+      "returns": [
+        "Array of Sticker"
+      ]
+    },
+    "createForumTopic": {
+      "name": "createForumTopic",
+      "href": "https://core.telegram.org/bots/api#createforumtopic",
+      "description": [
+        "Use this method to create a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights. Returns information about the created topic as a ForumTopic object."
+      ],
+      "returns": [
+        "ForumTopic"
+      ],
+      "fields": [
+        {
+          "name": "chat_id",
+          "types": [
+            "Integer",
+            "String"
+          ],
+          "required": true,
+          "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)"
+        },
+        {
+          "name": "name",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Topic name, 1-128 characters"
+        },
+        {
+          "name": "icon_color",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Color of the topic icon in RGB format. Currently, must be one of 0x6FB9F0, 0xFFD67E, 0xCB86DB, 0x8EEE98, 0xFF93B2, or 0xFB6F5F"
+        },
+        {
+          "name": "icon_custom_emoji_id",
+          "types": [
+            "String"
+          ],
+          "required": false,
+          "description": "Unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers."
+        }
+      ]
+    },
+    "editForumTopic": {
+      "name": "editForumTopic",
+      "href": "https://core.telegram.org/bots/api#editforumtopic",
+      "description": [
+        "Use this method to edit name and icon of a topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success."
+      ],
       "returns": [
         "Boolean"
       ],
+      "fields": [
+        {
+          "name": "chat_id",
+          "types": [
+            "Integer",
+            "String"
+          ],
+          "required": true,
+          "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)"
+        },
+        {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": true,
+          "description": "Unique identifier for the target message thread of the forum topic"
+        },
+        {
+          "name": "name",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "New topic name, 1-128 characters"
+        },
+        {
+          "name": "icon_custom_emoji_id",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "New unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers"
+        }
+      ]
+    },
+    "closeForumTopic": {
+      "name": "closeForumTopic",
+      "href": "https://core.telegram.org/bots/api#closeforumtopic",
+      "description": [
+        "Use this method to close an open topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
+      ],
+      "fields": [
+        {
+          "name": "chat_id",
+          "types": [
+            "Integer",
+            "String"
+          ],
+          "required": true,
+          "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)"
+        },
+        {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": true,
+          "description": "Unique identifier for the target message thread of the forum topic"
+        }
+      ]
+    },
+    "reopenForumTopic": {
+      "name": "reopenForumTopic",
+      "href": "https://core.telegram.org/bots/api#reopenforumtopic",
+      "description": [
+        "Use this method to reopen a closed topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
+      ],
+      "fields": [
+        {
+          "name": "chat_id",
+          "types": [
+            "Integer",
+            "String"
+          ],
+          "required": true,
+          "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)"
+        },
+        {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": true,
+          "description": "Unique identifier for the target message thread of the forum topic"
+        }
+      ]
+    },
+    "deleteForumTopic": {
+      "name": "deleteForumTopic",
+      "href": "https://core.telegram.org/bots/api#deleteforumtopic",
+      "description": [
+        "Use this method to delete a forum topic along with all its messages in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the can_delete_messages administrator rights. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
+      ],
+      "fields": [
+        {
+          "name": "chat_id",
+          "types": [
+            "Integer",
+            "String"
+          ],
+          "required": true,
+          "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)"
+        },
+        {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": true,
+          "description": "Unique identifier for the target message thread of the forum topic"
+        }
+      ]
+    },
+    "unpinAllForumTopicMessages": {
+      "name": "unpinAllForumTopicMessages",
+      "href": "https://core.telegram.org/bots/api#unpinallforumtopicmessages",
+      "description": [
+        "Use this method to clear the list of pinned messages in a forum topic. The bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
+      ],
+      "fields": [
+        {
+          "name": "chat_id",
+          "types": [
+            "Integer",
+            "String"
+          ],
+          "required": true,
+          "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)"
+        },
+        {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": true,
+          "description": "Unique identifier for the target message thread of the forum topic"
+        }
+      ]
+    },
+    "answerCallbackQuery": {
+      "name": "answerCallbackQuery",
+      "href": "https://core.telegram.org/bots/api#answercallbackquery",
       "description": [
         "Use this method to send answers to callback queries sent from inline keyboards. The answer will be displayed to the user as a notification at the top of the chat screen or as an alert. On success, True is returned."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -3072,7 +3432,7 @@
             "String"
           ],
           "required": false,
-          "description": "URL that will be opened by the user's client. If you have created a Game and accepted the conditions via @Botfather, specify the URL that opens your game - note that this will only work if the query comes from a callback_game button. Otherwise, you may use links like t.me/your_bot?start=XXXX that open your bot with a parameter."
+          "description": "URL that will be opened by the user's client. If you have created a Game and accepted the conditions via @BotFather, specify the URL that opens your game - note that this will only work if the query comes from a callback_game button. Otherwise, you may use links like t.me/your_bot?start=XXXX that open your bot with a parameter."
         },
         {
           "name": "cache_time",
@@ -3087,11 +3447,11 @@
     "setMyCommands": {
       "name": "setMyCommands",
       "href": "https://core.telegram.org/bots/api#setmycommands",
+      "description": [
+        "Use this method to change the list of the bot's commands. See this manual for more details about bot commands. Returns True on success."
+      ],
       "returns": [
         "Boolean"
-      ],
-      "description": [
-        "Use this method to change the list of the bot's commands. See https://core.telegram.org/bots#commands for more details about bot commands. Returns True on success."
       ],
       "fields": [
         {
@@ -3123,11 +3483,11 @@
     "deleteMyCommands": {
       "name": "deleteMyCommands",
       "href": "https://core.telegram.org/bots/api#deletemycommands",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to delete the list of the bot's commands for the given scope and user language. After deletion, higher level commands will be shown to affected users. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -3151,11 +3511,11 @@
     "getMyCommands": {
       "name": "getMyCommands",
       "href": "https://core.telegram.org/bots/api#getmycommands",
+      "description": [
+        "Use this method to get the current list of the bot's commands for the given scope and user language. Returns an Array of BotCommand objects. If commands aren't set, an empty list is returned."
+      ],
       "returns": [
         "Array of BotCommand"
-      ],
-      "description": [
-        "Use this method to get the current list of the bot's commands for the given scope and user language. Returns Array of BotCommand on success. If commands aren't set, an empty list is returned."
       ],
       "fields": [
         {
@@ -3176,15 +3536,111 @@
         }
       ]
     },
+    "setChatMenuButton": {
+      "name": "setChatMenuButton",
+      "href": "https://core.telegram.org/bots/api#setchatmenubutton",
+      "description": [
+        "Use this method to change the bot's menu button in a private chat, or the default menu button. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
+      ],
+      "fields": [
+        {
+          "name": "chat_id",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Unique identifier for the target private chat. If not specified, default bot's menu button will be changed"
+        },
+        {
+          "name": "menu_button",
+          "types": [
+            "MenuButton"
+          ],
+          "required": false,
+          "description": "A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault"
+        }
+      ]
+    },
+    "getChatMenuButton": {
+      "name": "getChatMenuButton",
+      "href": "https://core.telegram.org/bots/api#getchatmenubutton",
+      "description": [
+        "Use this method to get the current value of the bot's menu button in a private chat, or the default menu button. Returns MenuButton on success."
+      ],
+      "returns": [
+        "MenuButton"
+      ],
+      "fields": [
+        {
+          "name": "chat_id",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Unique identifier for the target private chat. If not specified, default bot's menu button will be returned"
+        }
+      ]
+    },
+    "setMyDefaultAdministratorRights": {
+      "name": "setMyDefaultAdministratorRights",
+      "href": "https://core.telegram.org/bots/api#setmydefaultadministratorrights",
+      "description": [
+        "Use this method to change the default administrator rights requested by the bot when it's added as an administrator to groups or channels. These rights will be suggested to users, but they are are free to modify the list before adding the bot. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
+      ],
+      "fields": [
+        {
+          "name": "rights",
+          "types": [
+            "ChatAdministratorRights"
+          ],
+          "required": false,
+          "description": "A JSON-serialized object describing new default administrator rights. If not specified, the default administrator rights will be cleared."
+        },
+        {
+          "name": "for_channels",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Pass True to change the default administrator rights of the bot in channels. Otherwise, the default administrator rights of the bot for groups and supergroups will be changed."
+        }
+      ]
+    },
+    "getMyDefaultAdministratorRights": {
+      "name": "getMyDefaultAdministratorRights",
+      "href": "https://core.telegram.org/bots/api#getmydefaultadministratorrights",
+      "description": [
+        "Use this method to get the current default administrator rights of the bot. Returns ChatAdministratorRights on success."
+      ],
+      "returns": [
+        "ChatAdministratorRights"
+      ],
+      "fields": [
+        {
+          "name": "for_channels",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Pass True to get default administrator rights of the bot in channels. Otherwise, default administrator rights of the bot for groups and supergroups will be returned."
+        }
+      ]
+    },
     "editMessageText": {
       "name": "editMessageText",
       "href": "https://core.telegram.org/bots/api#editmessagetext",
+      "description": [
+        "Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned."
+      ],
       "returns": [
         "Message",
         "Boolean"
-      ],
-      "description": [
-        "Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned."
       ],
       "fields": [
         {
@@ -3257,12 +3713,12 @@
     "editMessageCaption": {
       "name": "editMessageCaption",
       "href": "https://core.telegram.org/bots/api#editmessagecaption",
+      "description": [
+        "Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned."
+      ],
       "returns": [
         "Message",
         "Boolean"
-      ],
-      "description": [
-        "Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned."
       ],
       "fields": [
         {
@@ -3327,12 +3783,12 @@
     "editMessageMedia": {
       "name": "editMessageMedia",
       "href": "https://core.telegram.org/bots/api#editmessagemedia",
+      "description": [
+        "Use this method to edit animation, audio, document, photo, or video messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned."
+      ],
       "returns": [
         "Message",
         "Boolean"
-      ],
-      "description": [
-        "Use this method to edit animation, audio, document, photo, or video messages. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file_id or specify a URL. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned."
       ],
       "fields": [
         {
@@ -3381,12 +3837,12 @@
     "editMessageReplyMarkup": {
       "name": "editMessageReplyMarkup",
       "href": "https://core.telegram.org/bots/api#editmessagereplymarkup",
+      "description": [
+        "Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned."
+      ],
       "returns": [
         "Message",
         "Boolean"
-      ],
-      "description": [
-        "Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned."
       ],
       "fields": [
         {
@@ -3427,11 +3883,11 @@
     "stopPoll": {
       "name": "stopPoll",
       "href": "https://core.telegram.org/bots/api#stoppoll",
-      "returns": [
-        "Poll"
-      ],
       "description": [
         "Use this method to stop a poll which was sent by the bot. On success, the stopped Poll is returned."
+      ],
+      "returns": [
+        "Poll"
       ],
       "fields": [
         {
@@ -3464,11 +3920,20 @@
     "deleteMessage": {
       "name": "deleteMessage",
       "href": "https://core.telegram.org/bots/api#deletemessage",
+      "description": [
+        "Use this method to delete a message, including service messages, with the following limitations:",
+        "- A message can only be deleted if it was sent less than 48 hours ago.",
+        "- Service messages about a supergroup, channel, or forum topic creation can't be deleted.",
+        "- A dice message in a private chat can only be deleted if it was sent more than 24 hours ago.",
+        "- Bots can delete outgoing messages in private chats, groups, and supergroups.",
+        "- Bots can delete incoming messages in private chats.",
+        "- Bots granted can_post_messages permissions can delete outgoing messages in channels.",
+        "- If the bot is an administrator of a group, it can delete any message there.",
+        "- If the bot has can_delete_messages permission in a supergroup or a channel, it can delete any message there.",
+        "Returns True on success."
+      ],
       "returns": [
         "Boolean"
-      ],
-      "description": [
-        "Use this method to delete a message, including service messages, with the following limitations:- A message can only be deleted if it was sent less than 48 hours ago.- A dice message in a private chat can only be deleted if it was sent more than 24 hours ago.- Bots can delete outgoing messages in private chats, groups, and supergroups.- Bots can delete incoming messages in private chats.- Bots granted can_post_messages permissions can delete outgoing messages in channels.- If the bot is an administrator of a group, it can delete any message there.- If the bot has can_delete_messages permission in a supergroup or a channel, it can delete any message there.Returns True on success."
       ],
       "fields": [
         {
@@ -3493,11 +3958,11 @@
     "sendSticker": {
       "name": "sendSticker",
       "href": "https://core.telegram.org/bots/api#sendsticker",
-      "returns": [
-        "Message"
-      ],
       "description": [
         "Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned."
+      ],
+      "returns": [
+        "Message"
       ],
       "fields": [
         {
@@ -3510,13 +3975,21 @@
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
         },
         {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only"
+        },
+        {
           "name": "sticker",
           "types": [
             "InputFile",
             "String"
           ],
           "required": true,
-          "description": "Sticker to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a .WEBP file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files: https://core.telegram.org/bots/api#sending-files"
+          "description": "Sticker to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a .WEBP file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "disable_notification",
@@ -3548,7 +4021,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "name": "reply_markup",
@@ -3566,11 +4039,11 @@
     "getStickerSet": {
       "name": "getStickerSet",
       "href": "https://core.telegram.org/bots/api#getstickerset",
-      "returns": [
-        "StickerSet"
-      ],
       "description": [
         "Use this method to get a sticker set. On success, a StickerSet object is returned."
+      ],
+      "returns": [
+        "StickerSet"
       ],
       "fields": [
         {
@@ -3583,14 +4056,34 @@
         }
       ]
     },
+    "getCustomEmojiStickers": {
+      "name": "getCustomEmojiStickers",
+      "href": "https://core.telegram.org/bots/api#getcustomemojistickers",
+      "description": [
+        "Use this method to get information about custom emoji stickers by their identifiers. Returns an Array of Sticker objects."
+      ],
+      "returns": [
+        "Array of Sticker"
+      ],
+      "fields": [
+        {
+          "name": "custom_emoji_ids",
+          "types": [
+            "Array of String"
+          ],
+          "required": true,
+          "description": "List of custom emoji identifiers. At most 200 custom emoji identifiers can be specified."
+        }
+      ]
+    },
     "uploadStickerFile": {
       "name": "uploadStickerFile",
       "href": "https://core.telegram.org/bots/api#uploadstickerfile",
-      "returns": [
-        "File"
-      ],
       "description": [
         "Use this method to upload a .PNG file with a sticker for later use in createNewStickerSet and addStickerToSet methods (can be used multiple times). Returns the uploaded File on success."
+      ],
+      "returns": [
+        "File"
       ],
       "fields": [
         {
@@ -3607,18 +4100,18 @@
             "InputFile"
           ],
           "required": true,
-          "description": "PNG image with the sticker, must be up to 512 kilobytes in size, dimensions must not exceed 512px, and either width or height must be exactly 512px. More info on Sending Files: https://core.telegram.org/bots/api#sending-files"
+          "description": "PNG image with the sticker, must be up to 512 kilobytes in size, dimensions must not exceed 512px, and either width or height must be exactly 512px. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         }
       ]
     },
     "createNewStickerSet": {
       "name": "createNewStickerSet",
       "href": "https://core.telegram.org/bots/api#createnewstickerset",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to create a new sticker set owned by a user. The bot will be able to edit the sticker set thus created. You must use exactly one of the fields png_sticker, tgs_sticker, or webm_sticker. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -3635,7 +4128,7 @@
             "String"
           ],
           "required": true,
-          "description": "Short name of sticker set, to be used in t.me/addstickers/ URLs (e.g., animals). Can contain only english letters, digits and underscores. Must begin with a letter, can't contain consecutive underscores and must end in \"_by_<bot_username>\". <bot_username> is case insensitive. 1-64 characters."
+          "description": "Short name of sticker set, to be used in t.me/addstickers/ URLs (e.g., animals). Can contain only English letters, digits and underscores. Must begin with a letter, can't contain consecutive underscores and must end in \"_by_<bot_username>\". <bot_username> is case insensitive. 1-64 characters."
         },
         {
           "name": "title",
@@ -3652,7 +4145,7 @@
             "String"
           ],
           "required": false,
-          "description": "PNG image with the sticker, must be up to 512 kilobytes in size, dimensions must not exceed 512px, and either width or height must be exactly 512px. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files: https://core.telegram.org/bots/api#sending-files"
+          "description": "PNG image with the sticker, must be up to 512 kilobytes in size, dimensions must not exceed 512px, and either width or height must be exactly 512px. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "tgs_sticker",
@@ -3671,20 +4164,20 @@
           "description": "WEBM video with the sticker, uploaded using multipart/form-data. See https://core.telegram.org/stickers#video-sticker-requirements for technical requirements"
         },
         {
+          "name": "sticker_type",
+          "types": [
+            "String"
+          ],
+          "required": false,
+          "description": "Type of stickers in the set, pass \"regular\" or \"mask\". Custom emoji sticker sets can't be created via the Bot API at the moment. By default, a regular sticker set is created."
+        },
+        {
           "name": "emojis",
           "types": [
             "String"
           ],
           "required": true,
           "description": "One or more emoji corresponding to the sticker"
-        },
-        {
-          "name": "contains_masks",
-          "types": [
-            "Boolean"
-          ],
-          "required": false,
-          "description": "Pass True, if a set of mask stickers should be created"
         },
         {
           "name": "mask_position",
@@ -3699,11 +4192,11 @@
     "addStickerToSet": {
       "name": "addStickerToSet",
       "href": "https://core.telegram.org/bots/api#addstickertoset",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to add a new sticker to a set created by the bot. You must use exactly one of the fields png_sticker, tgs_sticker, or webm_sticker. Animated stickers can be added to animated sticker sets and only to them. Animated sticker sets can have up to 50 stickers. Static sticker sets can have up to 120 stickers. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -3729,7 +4222,7 @@
             "String"
           ],
           "required": false,
-          "description": "PNG image with the sticker, must be up to 512 kilobytes in size, dimensions must not exceed 512px, and either width or height must be exactly 512px. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files: https://core.telegram.org/bots/api#sending-files"
+          "description": "PNG image with the sticker, must be up to 512 kilobytes in size, dimensions must not exceed 512px, and either width or height must be exactly 512px. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "tgs_sticker",
@@ -3768,11 +4261,11 @@
     "setStickerPositionInSet": {
       "name": "setStickerPositionInSet",
       "href": "https://core.telegram.org/bots/api#setstickerpositioninset",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to move a sticker in a set created by the bot to a specific position. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -3796,11 +4289,11 @@
     "deleteStickerFromSet": {
       "name": "deleteStickerFromSet",
       "href": "https://core.telegram.org/bots/api#deletestickerfromset",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to delete a sticker from a set created by the bot. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -3816,11 +4309,11 @@
     "setStickerSetThumb": {
       "name": "setStickerSetThumb",
       "href": "https://core.telegram.org/bots/api#setstickersetthumb",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Use this method to set the thumbnail of a sticker set. Animated thumbnails can be set for animated sticker sets only. Video thumbnails can be set only for video sticker sets only. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -3846,18 +4339,19 @@
             "String"
           ],
           "required": false,
-          "description": "A PNG image with the thumbnail, must be up to 128 kilobytes in size and have width and height exactly 100px, or a TGS animation with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#animated-sticker-requirements for animated sticker technical requirements, or a WEBM video with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#video-sticker-requirements for video sticker technical requirements. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files: https://core.telegram.org/bots/api#sending-files. Animated sticker set thumbnails can't be uploaded via HTTP URL."
+          "description": "A PNG image with the thumbnail, must be up to 128 kilobytes in size and have width and height exactly 100px, or a TGS animation with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#animated-sticker-requirements for animated sticker technical requirements, or a WEBM video with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#video-sticker-requirements for video sticker technical requirements. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files: https://core.telegram.org/bots/api#sending-files. Animated sticker set thumbnails can't be uploaded via HTTP URL."
         }
       ]
     },
     "answerInlineQuery": {
       "name": "answerInlineQuery",
       "href": "https://core.telegram.org/bots/api#answerinlinequery",
+      "description": [
+        "Use this method to send answers to an inline query. On success, True is returned.",
+        "No more than 50 results per query are allowed."
+      ],
       "returns": [
         "Boolean"
-      ],
-      "description": [
-        "Use this method to send answers to an inline query. On success, True is returned.No more than 50 results per query are allowed."
       ],
       "fields": [
         {
@@ -3890,7 +4384,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if results may be cached on the server side only for the user that sent the query. By default, results may be returned to any user who sends the same query"
+          "description": "Pass True if results may be cached on the server side only for the user that sent the query. By default, results may be returned to any user who sends the same query"
         },
         {
           "name": "next_offset",
@@ -3918,14 +4412,42 @@
         }
       ]
     },
+    "answerWebAppQuery": {
+      "name": "answerWebAppQuery",
+      "href": "https://core.telegram.org/bots/api#answerwebappquery",
+      "description": [
+        "Use this method to set the result of an interaction with a Web App and send a corresponding message on behalf of the user to the chat from which the query originated. On success, a SentWebAppMessage object is returned."
+      ],
+      "returns": [
+        "SentWebAppMessage"
+      ],
+      "fields": [
+        {
+          "name": "web_app_query_id",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Unique identifier for the query to be answered"
+        },
+        {
+          "name": "result",
+          "types": [
+            "InlineQueryResult"
+          ],
+          "required": true,
+          "description": "A JSON-serialized object describing the message to be sent"
+        }
+      ]
+    },
     "sendInvoice": {
       "name": "sendInvoice",
       "href": "https://core.telegram.org/bots/api#sendinvoice",
-      "returns": [
-        "Message"
-      ],
       "description": [
         "Use this method to send invoices. On success, the sent Message is returned."
+      ],
+      "returns": [
+        "Message"
       ],
       "fields": [
         {
@@ -3936,6 +4458,14 @@
           ],
           "required": true,
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only"
         },
         {
           "name": "title",
@@ -3967,7 +4497,7 @@
             "String"
           ],
           "required": true,
-          "description": "Payments provider token, obtained via Botfather"
+          "description": "Payment provider token, obtained via @BotFather"
         },
         {
           "name": "currency",
@@ -4015,7 +4545,7 @@
             "String"
           ],
           "required": false,
-          "description": "A JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of required fields should be provided by the payment provider."
+          "description": "JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of required fields should be provided by the payment provider."
         },
         {
           "name": "photo_url",
@@ -4031,7 +4561,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Photo size"
+          "description": "Photo size in bytes"
         },
         {
           "name": "photo_width",
@@ -4055,7 +4585,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if you require the user's full name to complete the order"
+          "description": "Pass True if you require the user's full name to complete the order"
         },
         {
           "name": "need_phone_number",
@@ -4063,7 +4593,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if you require the user's phone number to complete the order"
+          "description": "Pass True if you require the user's phone number to complete the order"
         },
         {
           "name": "need_email",
@@ -4071,7 +4601,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if you require the user's email address to complete the order"
+          "description": "Pass True if you require the user's email address to complete the order"
         },
         {
           "name": "need_shipping_address",
@@ -4079,7 +4609,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if you require the user's shipping address to complete the order"
+          "description": "Pass True if you require the user's shipping address to complete the order"
         },
         {
           "name": "send_phone_number_to_provider",
@@ -4087,7 +4617,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if user's phone number should be sent to provider"
+          "description": "Pass True if the user's phone number should be sent to provider"
         },
         {
           "name": "send_email_to_provider",
@@ -4095,7 +4625,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if user's email address should be sent to provider"
+          "description": "Pass True if the user's email address should be sent to provider"
         },
         {
           "name": "is_flexible",
@@ -4103,7 +4633,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the final price depends on the shipping method"
+          "description": "Pass True if the final price depends on the shipping method"
         },
         {
           "name": "disable_notification",
@@ -4135,7 +4665,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "name": "reply_markup",
@@ -4147,14 +4677,186 @@
         }
       ]
     },
+    "createInvoiceLink": {
+      "name": "createInvoiceLink",
+      "href": "https://core.telegram.org/bots/api#createinvoicelink",
+      "description": [
+        "Use this method to create a link for an invoice. Returns the created invoice link as String on success."
+      ],
+      "returns": [
+        "String"
+      ],
+      "fields": [
+        {
+          "name": "title",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Product name, 1-32 characters"
+        },
+        {
+          "name": "description",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Product description, 1-255 characters"
+        },
+        {
+          "name": "payload",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes."
+        },
+        {
+          "name": "provider_token",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Payment provider token, obtained via BotFather"
+        },
+        {
+          "name": "currency",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Three-letter ISO 4217 currency code, see more on currencies"
+        },
+        {
+          "name": "prices",
+          "types": [
+            "Array of LabeledPrice"
+          ],
+          "required": true,
+          "description": "Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)"
+        },
+        {
+          "name": "max_tip_amount",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "The maximum accepted amount for tips in the smallest units of the currency (integer, not float/double). For example, for a maximum tip of US$ 1.45 pass max_tip_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0"
+        },
+        {
+          "name": "suggested_tip_amounts",
+          "types": [
+            "Array of Integer"
+          ],
+          "required": false,
+          "description": "A JSON-serialized array of suggested amounts of tips in the smallest units of the currency (integer, not float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed max_tip_amount."
+        },
+        {
+          "name": "provider_data",
+          "types": [
+            "String"
+          ],
+          "required": false,
+          "description": "JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of required fields should be provided by the payment provider."
+        },
+        {
+          "name": "photo_url",
+          "types": [
+            "String"
+          ],
+          "required": false,
+          "description": "URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service."
+        },
+        {
+          "name": "photo_size",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Photo size in bytes"
+        },
+        {
+          "name": "photo_width",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Photo width"
+        },
+        {
+          "name": "photo_height",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Photo height"
+        },
+        {
+          "name": "need_name",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Pass True if you require the user's full name to complete the order"
+        },
+        {
+          "name": "need_phone_number",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Pass True if you require the user's phone number to complete the order"
+        },
+        {
+          "name": "need_email",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Pass True if you require the user's email address to complete the order"
+        },
+        {
+          "name": "need_shipping_address",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Pass True if you require the user's shipping address to complete the order"
+        },
+        {
+          "name": "send_phone_number_to_provider",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Pass True if the user's phone number should be sent to the provider"
+        },
+        {
+          "name": "send_email_to_provider",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Pass True if the user's email address should be sent to the provider"
+        },
+        {
+          "name": "is_flexible",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Pass True if the final price depends on the shipping method"
+        }
+      ]
+    },
     "answerShippingQuery": {
       "name": "answerShippingQuery",
       "href": "https://core.telegram.org/bots/api#answershippingquery",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "If you sent an invoice requesting a shipping address and the parameter is_flexible was specified, the Bot API will send an Update with a shipping_query field to the bot. Use this method to reply to shipping queries. On success, True is returned."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -4171,7 +4873,7 @@
             "Boolean"
           ],
           "required": true,
-          "description": "Specify True if delivery to the specified address is possible and False if there are any problems (for example, if delivery to the specified address is not possible)"
+          "description": "Pass True if delivery to the specified address is possible and False if there are any problems (for example, if delivery to the specified address is not possible)"
         },
         {
           "name": "shipping_options",
@@ -4194,11 +4896,11 @@
     "answerPreCheckoutQuery": {
       "name": "answerPreCheckoutQuery",
       "href": "https://core.telegram.org/bots/api#answerprecheckoutquery",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Once the user has confirmed their payment and shipping details, the Bot API sends the final confirmation in the form of an Update with the field pre_checkout_query. Use this method to respond to such pre-checkout queries. On success, True is returned. Note: The Bot API must receive an answer within 10 seconds after the pre-checkout query was sent."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -4230,12 +4932,12 @@
     "setPassportDataErrors": {
       "name": "setPassportDataErrors",
       "href": "https://core.telegram.org/bots/api#setpassportdataerrors",
-      "returns": [
-        "Boolean"
-      ],
       "description": [
         "Informs a user that some of the Telegram Passport elements they provided contains errors. The user will not be able to re-submit their Passport to you until the errors are fixed (the contents of the field for which you returned the error must change). Returns True on success.",
         "Use this if the data submitted by the user doesn't satisfy the standards your service requires for any reason. For example, if a birthday date seems invalid, a submitted document is blurry, a scan shows evidence of tampering, etc. Supply some details in the error message to make sure the user knows how to correct the issues."
+      ],
+      "returns": [
+        "Boolean"
       ],
       "fields": [
         {
@@ -4259,11 +4961,11 @@
     "sendGame": {
       "name": "sendGame",
       "href": "https://core.telegram.org/bots/api#sendgame",
-      "returns": [
-        "Message"
-      ],
       "description": [
         "Use this method to send a game. On success, the sent Message is returned."
+      ],
+      "returns": [
+        "Message"
       ],
       "fields": [
         {
@@ -4275,12 +4977,20 @@
           "description": "Unique identifier for the target chat"
         },
         {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Unique identifier for the target message thread (topic) of the forum; for forum supergroups only"
+        },
+        {
           "name": "game_short_name",
           "types": [
             "String"
           ],
           "required": true,
-          "description": "Short name of the game, serves as the unique identifier for the game. Set up your games via Botfather."
+          "description": "Short name of the game, serves as the unique identifier for the game. Set up your games via @BotFather."
         },
         {
           "name": "disable_notification",
@@ -4312,7 +5022,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the message should be sent even if the specified replied-to message is not found"
+          "description": "Pass True if the message should be sent even if the specified replied-to message is not found"
         },
         {
           "name": "reply_markup",
@@ -4327,12 +5037,12 @@
     "setGameScore": {
       "name": "setGameScore",
       "href": "https://core.telegram.org/bots/api#setgamescore",
+      "description": [
+        "Use this method to set the score of the specified user in a game message. On success, if the message is not an inline message, the Message is returned, otherwise True is returned. Returns an error, if the new score is not greater than the user's current score in the chat and force is False."
+      ],
       "returns": [
         "Message",
         "Boolean"
-      ],
-      "description": [
-        "Use this method to set the score of the specified user in a game message. On success, if the message is not an inline message, the Message is returned, otherwise True is returned. Returns an error, if the new score is not greater than the user's current score in the chat and force is False."
       ],
       "fields": [
         {
@@ -4357,7 +5067,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters"
+          "description": "Pass True if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters"
         },
         {
           "name": "disable_edit_message",
@@ -4365,7 +5075,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the game message should not be automatically edited to include the current scoreboard"
+          "description": "Pass True if the game message should not be automatically edited to include the current scoreboard"
         },
         {
           "name": "chat_id",
@@ -4396,11 +5106,11 @@
     "getGameHighScores": {
       "name": "getGameHighScores",
       "href": "https://core.telegram.org/bots/api#getgamehighscores",
+      "description": [
+        "Use this method to get data for high score tables. Will return the score of the specified user and several of their neighbors in a game. Returns an Array of GameHighScore objects."
+      ],
       "returns": [
         "Array of GameHighScore"
-      ],
-      "description": [
-        "Use this method to get data for high score tables. Will return the score of the specified user and several of their neighbors in a game. On success, returns an Array of GameHighScore objects."
       ],
       "fields": [
         {
@@ -4443,7 +5153,8 @@
       "name": "Update",
       "href": "https://core.telegram.org/bots/api#update",
       "description": [
-        "This object represents an incoming update.At most one of the optional parameters can be present in any given update."
+        "This object represents an incoming update.",
+        "At most one of the optional parameters can be present in any given update."
       ],
       "fields": [
         {
@@ -4452,7 +5163,7 @@
             "Integer"
           ],
           "required": true,
-          "description": "The update's unique identifier. Update identifiers start from a certain positive number and increase sequentially. This ID becomes especially handy if you're using Webhooks, since it allows you to ignore repeated updates or to restore the correct update sequence, should they get out of order. If there are no new updates for at least a week, then identifier of the next update will be chosen randomly instead of sequentially."
+          "description": "The update's unique identifier. Update identifiers start from a certain positive number and increase sequentially. This ID becomes especially handy if you're using webhooks, since it allows you to ignore repeated updates or to restore the correct update sequence, should they get out of order. If there are no new updates for at least a week, then identifier of the next update will be chosen randomly instead of sequentially."
         },
         {
           "name": "message",
@@ -4572,7 +5283,7 @@
       "name": "WebhookInfo",
       "href": "https://core.telegram.org/bots/api#webhookinfo",
       "description": [
-        "Contains information about the current status of a webhook."
+        "Describes the current status of a webhook."
       ],
       "fields": [
         {
@@ -4624,12 +5335,20 @@
           "description": "Optional. Error message in human-readable format for the most recent error that happened when trying to deliver an update via webhook"
         },
         {
+          "name": "last_synchronization_error_date",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Optional. Unix time of the most recent error that happened when trying to synchronize available updates with Telegram datacenters"
+        },
+        {
           "name": "max_connections",
           "types": [
             "Integer"
           ],
           "required": false,
-          "description": "Optional. Maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery"
+          "description": "Optional. The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery"
         },
         {
           "name": "allowed_updates",
@@ -4695,6 +5414,22 @@
           ],
           "required": false,
           "description": "Optional. IETF language tag of the user's language"
+        },
+        {
+          "name": "is_premium",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if this user is a Telegram Premium user"
+        },
+        {
+          "name": "added_to_attachment_menu",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if this user added the bot to the attachment menu"
         },
         {
           "name": "can_join_groups",
@@ -4778,12 +5513,36 @@
           "description": "Optional. Last name of the other party in a private chat"
         },
         {
+          "name": "is_forum",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if the supergroup chat is a forum (has topics enabled)"
+        },
+        {
           "name": "photo",
           "types": [
             "ChatPhoto"
           ],
           "required": false,
           "description": "Optional. Chat photo. Returned only in getChat."
+        },
+        {
+          "name": "active_usernames",
+          "types": [
+            "Array of String"
+          ],
+          "required": false,
+          "description": "Optional. If non-empty, the list of all active chat usernames; for private chats, supergroups and channels. Returned only in getChat."
+        },
+        {
+          "name": "emoji_status_custom_emoji_id",
+          "types": [
+            "String"
+          ],
+          "required": false,
+          "description": "Optional. Custom emoji identifier of emoji status of the other party in a private chat. Returned only in getChat."
         },
         {
           "name": "bio",
@@ -4800,6 +5559,30 @@
           ],
           "required": false,
           "description": "Optional. True, if privacy settings of the other party in the private chat allows to use tg://user?id=<user_id> links only in chats with the user. Returned only in getChat."
+        },
+        {
+          "name": "has_restricted_voice_and_video_messages",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if the privacy settings of the other party restrict sending voice and video note messages in the private chat. Returned only in getChat."
+        },
+        {
+          "name": "join_to_send_messages",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if users need to join the supergroup before they can send messages. Returned only in getChat."
+        },
+        {
+          "name": "join_by_request",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if all users directly joining the supergroup need to be approved by supergroup administrators. Returned only in getChat."
         },
         {
           "name": "description",
@@ -4907,6 +5690,14 @@
           "description": "Unique message identifier inside this chat"
         },
         {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Optional. Unique identifier of a message thread to which the message belongs; for supergroups only"
+        },
+        {
           "name": "from",
           "types": [
             "User"
@@ -4920,7 +5711,7 @@
             "Chat"
           ],
           "required": false,
-          "description": "Optional. Sender of the message, sent on behalf of a chat. For example, the channel itself for channel posts, the supergroup itself for messages from anonymous group administrators, the linked channel for messages automatically forwarded to the discussion group.  For backward compatibility, the field from contains a fake sender user in non-channel chats, if the message was sent on behalf of a chat."
+          "description": "Optional. Sender of the message, sent on behalf of a chat. For example, the channel itself for channel posts, the supergroup itself for messages from anonymous group administrators, the linked channel for messages automatically forwarded to the discussion group. For backward compatibility, the field from contains a fake sender user in non-channel chats, if the message was sent on behalf of a chat."
         },
         {
           "name": "date",
@@ -4987,6 +5778,14 @@
           "description": "Optional. For forwarded messages, date the original message was sent in Unix time"
         },
         {
+          "name": "is_topic_message",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if the message is sent to a forum topic"
+        },
+        {
           "name": "is_automatic_forward",
           "types": [
             "Boolean"
@@ -5048,7 +5847,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. For text messages, the actual UTF-8 text of the message, 0-4096 characters"
+          "description": "Optional. For text messages, the actual UTF-8 text of the message"
         },
         {
           "name": "entities",
@@ -5128,7 +5927,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. Caption for the animation, audio, document, photo, video or voice, 0-1024 characters"
+          "description": "Optional. Caption for the animation, audio, document, photo, video or voice"
         },
         {
           "name": "caption_entities",
@@ -5323,36 +6122,68 @@
           "description": "Optional. Service message. A user in the chat triggered another user's proximity alert while sharing Live Location."
         },
         {
-          "name": "voice_chat_scheduled",
+          "name": "forum_topic_created",
           "types": [
-            "VoiceChatScheduled"
+            "ForumTopicCreated"
           ],
           "required": false,
-          "description": "Optional. Service message: voice chat scheduled"
+          "description": "Optional. Service message: forum topic created"
         },
         {
-          "name": "voice_chat_started",
+          "name": "forum_topic_closed",
           "types": [
-            "VoiceChatStarted"
+            "ForumTopicClosed"
           ],
           "required": false,
-          "description": "Optional. Service message: voice chat started"
+          "description": "Optional. Service message: forum topic closed"
         },
         {
-          "name": "voice_chat_ended",
+          "name": "forum_topic_reopened",
           "types": [
-            "VoiceChatEnded"
+            "ForumTopicReopened"
           ],
           "required": false,
-          "description": "Optional. Service message: voice chat ended"
+          "description": "Optional. Service message: forum topic reopened"
         },
         {
-          "name": "voice_chat_participants_invited",
+          "name": "video_chat_scheduled",
           "types": [
-            "VoiceChatParticipantsInvited"
+            "VideoChatScheduled"
           ],
           "required": false,
-          "description": "Optional. Service message: new participants invited to a voice chat"
+          "description": "Optional. Service message: video chat scheduled"
+        },
+        {
+          "name": "video_chat_started",
+          "types": [
+            "VideoChatStarted"
+          ],
+          "required": false,
+          "description": "Optional. Service message: video chat started"
+        },
+        {
+          "name": "video_chat_ended",
+          "types": [
+            "VideoChatEnded"
+          ],
+          "required": false,
+          "description": "Optional. Service message: video chat ended"
+        },
+        {
+          "name": "video_chat_participants_invited",
+          "types": [
+            "VideoChatParticipantsInvited"
+          ],
+          "required": false,
+          "description": "Optional. Service message: new participants invited to a video chat"
+        },
+        {
+          "name": "web_app_data",
+          "types": [
+            "WebAppData"
+          ],
+          "required": false,
+          "description": "Optional. Service message: data sent by a Web App"
         },
         {
           "name": "reply_markup",
@@ -5394,7 +6225,7 @@
             "String"
           ],
           "required": true,
-          "description": "Type of the entity. Currently, can be \"mention\" (@username), \"hashtag\" (#hashtag), \"cashtag\" ($USD), \"bot_command\" (/start@jobs_bot), \"url\" (https://telegram.org), \"email\" (do-not-reply@telegram.org), \"phone_number\" (+1-212-555-0123), \"bold\" (bold text), \"italic\" (italic text), \"underline\" (underlined text), \"strikethrough\" (strikethrough text), \"spoiler\" (spoiler message), \"code\" (monowidth string), \"pre\" (monowidth block), \"text_link\" (for clickable text URLs), \"text_mention\" (for users without usernames)"
+          "description": "Type of the entity. Currently, can be \"mention\" (@username), \"hashtag\" (#hashtag), \"cashtag\" ($USD), \"bot_command\" (/start@jobs_bot), \"url\" (https://telegram.org), \"email\" (do-not-reply@telegram.org), \"phone_number\" (+1-212-555-0123), \"bold\" (bold text), \"italic\" (italic text), \"underline\" (underlined text), \"strikethrough\" (strikethrough text), \"spoiler\" (spoiler message), \"code\" (monowidth string), \"pre\" (monowidth block), \"text_link\" (for clickable text URLs), \"text_mention\" (for users without usernames), \"custom_emoji\" (for inline custom emoji stickers)"
         },
         {
           "name": "offset",
@@ -5418,7 +6249,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. For \"text_link\" only, url that will be opened after user taps on the text"
+          "description": "Optional. For \"text_link\" only, URL that will be opened after user taps on the text"
         },
         {
           "name": "user",
@@ -5435,6 +6266,14 @@
           ],
           "required": false,
           "description": "Optional. For \"pre\" only, the programming language of the entity text"
+        },
+        {
+          "name": "custom_emoji_id",
+          "types": [
+            "String"
+          ],
+          "required": false,
+          "description": "Optional. For \"custom_emoji\" only, unique identifier of the custom emoji. Use getCustomEmojiStickers to get full information about the sticker"
         }
       ]
     },
@@ -5564,7 +6403,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. File size in bytes"
+          "description": "Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value."
         }
       ]
     },
@@ -5637,7 +6476,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. File size in bytes"
+          "description": "Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value."
         },
         {
           "name": "thumb",
@@ -5702,7 +6541,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. File size in bytes"
+          "description": "Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value."
         }
       ]
     },
@@ -5775,7 +6614,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. Mime type of a file as defined by sender"
+          "description": "Optional. MIME type of the file as defined by sender"
         },
         {
           "name": "file_size",
@@ -5783,7 +6622,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. File size in bytes"
+          "description": "Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value."
         }
       ]
     },
@@ -5889,7 +6728,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. File size in bytes"
+          "description": "Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value."
         }
       ]
     },
@@ -6191,7 +7030,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. Maximum distance for proximity alerts about approaching another chat member, in meters. For sent live locations only."
+          "description": "Optional. The maximum distance for proximity alerts about approaching another chat member, in meters. For sent live locations only."
         }
       ]
     },
@@ -6260,6 +7099,31 @@
         }
       ]
     },
+    "WebAppData": {
+      "name": "WebAppData",
+      "href": "https://core.telegram.org/bots/api#webappdata",
+      "description": [
+        "Describes data sent from a Web App to the bot."
+      ],
+      "fields": [
+        {
+          "name": "data",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "The data. Be aware that a bad client can send arbitrary data in this field."
+        },
+        {
+          "name": "button_text",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Text of the web_app keyboard button from which the Web App was opened. Be aware that a bad client can send arbitrary data in this field."
+        }
+      ]
+    },
     "ProximityAlertTriggered": {
       "name": "ProximityAlertTriggered",
       "href": "https://core.telegram.org/bots/api#proximityalerttriggered",
@@ -6310,11 +7174,58 @@
         }
       ]
     },
-    "VoiceChatScheduled": {
-      "name": "VoiceChatScheduled",
-      "href": "https://core.telegram.org/bots/api#voicechatscheduled",
+    "ForumTopicCreated": {
+      "name": "ForumTopicCreated",
+      "href": "https://core.telegram.org/bots/api#forumtopiccreated",
       "description": [
-        "This object represents a service message about a voice chat scheduled in the chat."
+        "This object represents a service message about a new forum topic created in the chat."
+      ],
+      "fields": [
+        {
+          "name": "name",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Name of the topic"
+        },
+        {
+          "name": "icon_color",
+          "types": [
+            "Integer"
+          ],
+          "required": true,
+          "description": "Color of the topic icon in RGB format"
+        },
+        {
+          "name": "icon_custom_emoji_id",
+          "types": [
+            "String"
+          ],
+          "required": false,
+          "description": "Optional. Unique identifier of the custom emoji shown as the topic icon"
+        }
+      ]
+    },
+    "ForumTopicClosed": {
+      "name": "ForumTopicClosed",
+      "href": "https://core.telegram.org/bots/api#forumtopicclosed",
+      "description": [
+        "This object represents a service message about a forum topic closed in the chat. Currently holds no information."
+      ]
+    },
+    "ForumTopicReopened": {
+      "name": "ForumTopicReopened",
+      "href": "https://core.telegram.org/bots/api#forumtopicreopened",
+      "description": [
+        "This object represents a service message about a forum topic reopened in the chat. Currently holds no information."
+      ]
+    },
+    "VideoChatScheduled": {
+      "name": "VideoChatScheduled",
+      "href": "https://core.telegram.org/bots/api#videochatscheduled",
+      "description": [
+        "This object represents a service message about a video chat scheduled in the chat."
       ],
       "fields": [
         {
@@ -6323,22 +7234,22 @@
             "Integer"
           ],
           "required": true,
-          "description": "Point in time (Unix timestamp) when the voice chat is supposed to be started by a chat administrator"
+          "description": "Point in time (Unix timestamp) when the video chat is supposed to be started by a chat administrator"
         }
       ]
     },
-    "VoiceChatStarted": {
-      "name": "VoiceChatStarted",
-      "href": "https://core.telegram.org/bots/api#voicechatstarted",
+    "VideoChatStarted": {
+      "name": "VideoChatStarted",
+      "href": "https://core.telegram.org/bots/api#videochatstarted",
       "description": [
-        "This object represents a service message about a voice chat started in the chat. Currently holds no information."
+        "This object represents a service message about a video chat started in the chat. Currently holds no information."
       ]
     },
-    "VoiceChatEnded": {
-      "name": "VoiceChatEnded",
-      "href": "https://core.telegram.org/bots/api#voicechatended",
+    "VideoChatEnded": {
+      "name": "VideoChatEnded",
+      "href": "https://core.telegram.org/bots/api#videochatended",
       "description": [
-        "This object represents a service message about a voice chat ended in the chat."
+        "This object represents a service message about a video chat ended in the chat."
       ],
       "fields": [
         {
@@ -6347,15 +7258,15 @@
             "Integer"
           ],
           "required": true,
-          "description": "Voice chat duration in seconds"
+          "description": "Video chat duration in seconds"
         }
       ]
     },
-    "VoiceChatParticipantsInvited": {
-      "name": "VoiceChatParticipantsInvited",
-      "href": "https://core.telegram.org/bots/api#voicechatparticipantsinvited",
+    "VideoChatParticipantsInvited": {
+      "name": "VideoChatParticipantsInvited",
+      "href": "https://core.telegram.org/bots/api#videochatparticipantsinvited",
       "description": [
-        "This object represents a service message about new members invited to a voice chat."
+        "This object represents a service message about new members invited to a video chat."
       ],
       "fields": [
         {
@@ -6363,8 +7274,8 @@
           "types": [
             "Array of User"
           ],
-          "required": false,
-          "description": "Optional. New members that were invited to the voice chat"
+          "required": true,
+          "description": "New members that were invited to the video chat"
         }
       ]
     },
@@ -6422,7 +7333,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. File size in bytes, if known"
+          "description": "Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value."
         },
         {
           "name": "file_path",
@@ -6431,6 +7342,23 @@
           ],
           "required": false,
           "description": "Optional. File path. Use https://api.telegram.org/file/bot<token>/<file_path> to get the file."
+        }
+      ]
+    },
+    "WebAppInfo": {
+      "name": "WebAppInfo",
+      "href": "https://core.telegram.org/bots/api#webappinfo",
+      "description": [
+        "Describes a Web App."
+      ],
+      "fields": [
+        {
+          "name": "url",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "An HTTPS URL of a Web App to be opened with additional data as specified in Initializing Web Apps"
         }
       ]
     },
@@ -6487,8 +7415,10 @@
       "name": "KeyboardButton",
       "href": "https://core.telegram.org/bots/api#keyboardbutton",
       "description": [
-        "This object represents one button of the reply keyboard. For simple text buttons String can be used instead of this object to specify text of the button. Optional fields request_contact, request_location, and request_poll are mutually exclusive.",
-        "Note: request_contact and request_location options will only work in Telegram versions released after 9 April, 2016. Older clients will display unsupported message.Note: request_poll option will only work in Telegram versions released after 23 January, 2020. Older clients will display unsupported message."
+        "This object represents one button of the reply keyboard. For simple text buttons String can be used instead of this object to specify text of the button. Optional fields web_app, request_contact, request_location, and request_poll are mutually exclusive.",
+        "Note: request_contact and request_location options will only work in Telegram versions released after 9 April, 2016. Older clients will display unsupported message.",
+        "Note: request_poll option will only work in Telegram versions released after 23 January, 2020. Older clients will display unsupported message.",
+        "Note: web_app option will only work in Telegram versions released after 16 April, 2022. Older clients will display unsupported message."
       ],
       "fields": [
         {
@@ -6505,7 +7435,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. If True, the user's phone number will be sent as a contact when the button is pressed. Available in private chats only"
+          "description": "Optional. If True, the user's phone number will be sent as a contact when the button is pressed. Available in private chats only."
         },
         {
           "name": "request_location",
@@ -6513,7 +7443,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. If True, the user's current location will be sent when the button is pressed. Available in private chats only"
+          "description": "Optional. If True, the user's current location will be sent when the button is pressed. Available in private chats only."
         },
         {
           "name": "request_poll",
@@ -6521,7 +7451,15 @@
             "KeyboardButtonPollType"
           ],
           "required": false,
-          "description": "Optional. If specified, the user will be asked to create a poll and send it to the bot when the button is pressed. Available in private chats only"
+          "description": "Optional. If specified, the user will be asked to create a poll and send it to the bot when the button is pressed. Available in private chats only."
+        },
+        {
+          "name": "web_app",
+          "types": [
+            "WebAppInfo"
+          ],
+          "required": false,
+          "description": "Optional. If specified, the described Web App will be launched when the button is pressed. The Web App will be able to send a \"web_app_data\" service message. Available in private chats only."
         }
       ]
     },
@@ -6606,15 +7544,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. HTTP or tg:// url to be opened when the button is pressed. Links tg://user?id=<user_id> can be used to mention a user by their ID without using a username, if this is allowed by their privacy settings."
-        },
-        {
-          "name": "login_url",
-          "types": [
-            "LoginUrl"
-          ],
-          "required": false,
-          "description": "Optional. An HTTP URL used to automatically authorize the user. Can be used as a replacement for the Telegram Login Widget."
+          "description": "Optional. HTTP or tg:// URL to be opened when the button is pressed. Links tg://user?id=<user_id> can be used to mention a user by their ID without using a username, if this is allowed by their privacy settings."
         },
         {
           "name": "callback_data",
@@ -6625,12 +7555,28 @@
           "description": "Optional. Data to be sent in a callback query to the bot when button is pressed, 1-64 bytes"
         },
         {
+          "name": "web_app",
+          "types": [
+            "WebAppInfo"
+          ],
+          "required": false,
+          "description": "Optional. Description of the Web App that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method answerWebAppQuery. Available only in private chats between a user and the bot."
+        },
+        {
+          "name": "login_url",
+          "types": [
+            "LoginUrl"
+          ],
+          "required": false,
+          "description": "Optional. An HTTPS URL used to automatically authorize the user. Can be used as a replacement for the Telegram Login Widget."
+        },
+        {
           "name": "switch_inline_query",
           "types": [
             "String"
           ],
           "required": false,
-          "description": "Optional. If set, pressing the button will prompt the user to select one of their chats, open that chat and insert the bot's username and the specified inline query in the input field. Can be empty, in which case just the bot's username will be inserted. Note: This offers an easy way for users to start using your bot in inline mode when they are currently in a private chat with it. Especially useful when combined with switch_pm... actions - in this case the user will be automatically returned to the chat they switched from, skipping the chat selection screen."
+          "description": "Optional. If set, pressing the button will prompt the user to select one of their chats, open that chat and insert the bot's username and the specified inline query in the input field. May be empty, in which case just the bot's username will be inserted. Note: This offers an easy way for users to start using your bot in inline mode when they are currently in a private chat with it. Especially useful when combined with switch_pm... actions - in this case the user will be automatically returned to the chat they switched from, skipping the chat selection screen."
         },
         {
           "name": "switch_inline_query_current_chat",
@@ -6638,7 +7584,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. If set, pressing the button will insert the bot's username and the specified inline query in the current chat's input field. Can be empty, in which case only the bot's username will be inserted. This offers a quick way for the user to open your bot in inline mode in the same chat - good for selecting something from multiple options."
+          "description": "Optional. If set, pressing the button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted. This offers a quick way for the user to open your bot in inline mode in the same chat - good for selecting something from multiple options."
         },
         {
           "name": "callback_game",
@@ -6672,7 +7618,7 @@
             "String"
           ],
           "required": true,
-          "description": "An HTTP URL to be opened with user authorization data added to the query string when the button is pressed. If the user refuses to provide authorization data, the original URL without information about the user will be opened. The data added is the same as described in Receiving authorization data. NOTE: You must always check the hash of the received data to verify the authentication and the integrity of the data as described in Checking authorization."
+          "description": "An HTTPS URL to be opened with user authorization data added to the query string when the button is pressed. If the user refuses to provide authorization data, the original URL without information about the user will be opened. The data added is the same as described in Receiving authorization data. NOTE: You must always check the hash of the received data to verify the authentication and the integrity of the data as described in Checking authorization."
         },
         {
           "name": "forward_text",
@@ -6753,7 +7699,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. Data associated with the callback button. Be aware that a bad client can send arbitrary data in this field."
+          "description": "Optional. Data associated with the callback button. Be aware that the message originated the query can contain no callback buttons with this data."
         },
         {
           "name": "game_short_name",
@@ -6908,7 +7854,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. Maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999"
+          "description": "Optional. The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999"
         },
         {
           "name": "pending_join_request_count",
@@ -6917,6 +7863,111 @@
           ],
           "required": false,
           "description": "Optional. Number of pending join requests created using this link"
+        }
+      ]
+    },
+    "ChatAdministratorRights": {
+      "name": "ChatAdministratorRights",
+      "href": "https://core.telegram.org/bots/api#chatadministratorrights",
+      "description": [
+        "Represents the rights of an administrator in a chat."
+      ],
+      "fields": [
+        {
+          "name": "is_anonymous",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the user's presence in the chat is hidden"
+        },
+        {
+          "name": "can_manage_chat",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
+        },
+        {
+          "name": "can_delete_messages",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the administrator can delete messages of other users"
+        },
+        {
+          "name": "can_manage_video_chats",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the administrator can manage video chats"
+        },
+        {
+          "name": "can_restrict_members",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the administrator can restrict, ban or unban chat members"
+        },
+        {
+          "name": "can_promote_members",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that he has promoted, directly or indirectly (promoted by administrators that were appointed by the user)"
+        },
+        {
+          "name": "can_change_info",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the user is allowed to change the chat title, photo and other settings"
+        },
+        {
+          "name": "can_invite_users",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the user is allowed to invite new users to the chat"
+        },
+        {
+          "name": "can_post_messages",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if the administrator can post in the channel; channels only"
+        },
+        {
+          "name": "can_edit_messages",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if the administrator can edit messages of other users and can pin messages; channels only"
+        },
+        {
+          "name": "can_pin_messages",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if the user is allowed to pin messages; groups and supergroups only"
+        },
+        {
+          "name": "can_manage_topics",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; supergroups only"
         }
       ]
     },
@@ -7041,12 +8092,12 @@
           "description": "True, if the administrator can delete messages of other users"
         },
         {
-          "name": "can_manage_voice_chats",
+          "name": "can_manage_video_chats",
           "types": [
             "Boolean"
           ],
           "required": true,
-          "description": "True, if the administrator can manage voice chats"
+          "description": "True, if the administrator can manage video chats"
         },
         {
           "name": "can_restrict_members",
@@ -7103,6 +8154,14 @@
           ],
           "required": false,
           "description": "Optional. True, if the user is allowed to pin messages; groups and supergroups only"
+        },
+        {
+          "name": "can_manage_topics",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; supergroups only"
         },
         {
           "name": "custom_title",
@@ -7199,6 +8258,14 @@
           ],
           "required": true,
           "description": "True, if the user is allowed to pin messages"
+        },
+        {
+          "name": "can_manage_topics",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the user is allowed to create forum topics"
         },
         {
           "name": "can_send_messages",
@@ -7493,6 +8560,14 @@
           ],
           "required": false,
           "description": "Optional. True, if the user is allowed to pin messages. Ignored in public supergroups"
+        },
+        {
+          "name": "can_manage_topics",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if the user is allowed to create forum topics. If omitted defaults to the value of can_pin_messages"
         }
       ]
     },
@@ -7518,6 +8593,47 @@
           ],
           "required": true,
           "description": "Location address; 1-64 characters, as defined by the chat owner"
+        }
+      ]
+    },
+    "ForumTopic": {
+      "name": "ForumTopic",
+      "href": "https://core.telegram.org/bots/api#forumtopic",
+      "description": [
+        "This object represents a forum topic."
+      ],
+      "fields": [
+        {
+          "name": "message_thread_id",
+          "types": [
+            "Integer"
+          ],
+          "required": true,
+          "description": "Unique identifier of the forum topic"
+        },
+        {
+          "name": "name",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Name of the topic"
+        },
+        {
+          "name": "icon_color",
+          "types": [
+            "Integer"
+          ],
+          "required": true,
+          "description": "Color of the topic icon in RGB format"
+        },
+        {
+          "name": "icon_custom_emoji_id",
+          "types": [
+            "String"
+          ],
+          "required": false,
+          "description": "Optional. Unique identifier of the custom emoji shown as the topic icon"
         }
       ]
     },
@@ -7744,11 +8860,103 @@
         "BotCommandScope"
       ]
     },
+    "MenuButton": {
+      "name": "MenuButton",
+      "href": "https://core.telegram.org/bots/api#menubutton",
+      "description": [
+        "This object describes the bot's menu button in a private chat. It should be one of",
+        "- MenuButtonCommands",
+        "- MenuButtonWebApp",
+        "- MenuButtonDefault",
+        "If a menu button other than MenuButtonDefault is set for a private chat, then it is applied in the chat. Otherwise the default menu button is applied. By default, the menu button opens the list of bot commands."
+      ],
+      "subtypes": [
+        "MenuButtonCommands",
+        "MenuButtonWebApp",
+        "MenuButtonDefault"
+      ]
+    },
+    "MenuButtonCommands": {
+      "name": "MenuButtonCommands",
+      "href": "https://core.telegram.org/bots/api#menubuttoncommands",
+      "description": [
+        "Represents a menu button, which opens the bot's list of commands."
+      ],
+      "fields": [
+        {
+          "name": "type",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Type of the button, must be commands"
+        }
+      ],
+      "subtype_of": [
+        "MenuButton"
+      ]
+    },
+    "MenuButtonWebApp": {
+      "name": "MenuButtonWebApp",
+      "href": "https://core.telegram.org/bots/api#menubuttonwebapp",
+      "description": [
+        "Represents a menu button, which launches a Web App."
+      ],
+      "fields": [
+        {
+          "name": "type",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Type of the button, must be web_app"
+        },
+        {
+          "name": "text",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Text on the button"
+        },
+        {
+          "name": "web_app",
+          "types": [
+            "WebAppInfo"
+          ],
+          "required": true,
+          "description": "Description of the Web App that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method answerWebAppQuery."
+        }
+      ],
+      "subtype_of": [
+        "MenuButton"
+      ]
+    },
+    "MenuButtonDefault": {
+      "name": "MenuButtonDefault",
+      "href": "https://core.telegram.org/bots/api#menubuttondefault",
+      "description": [
+        "Describes that no specific value for the menu button was set."
+      ],
+      "fields": [
+        {
+          "name": "type",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Type of the button, must be default"
+        }
+      ],
+      "subtype_of": [
+        "MenuButton"
+      ]
+    },
     "ResponseParameters": {
       "name": "ResponseParameters",
       "href": "https://core.telegram.org/bots/api#responseparameters",
       "description": [
-        "Contains information about why a request was unsuccessful."
+        "Describes why a request was unsuccessful."
       ],
       "fields": [
         {
@@ -7809,7 +9017,7 @@
             "String"
           ],
           "required": true,
-          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More info on Sending Files: https://core.telegram.org/bots/api#sending-files"
+          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "caption",
@@ -7861,7 +9069,7 @@
             "String"
           ],
           "required": true,
-          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More info on Sending Files: https://core.telegram.org/bots/api#sending-files"
+          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "thumb",
@@ -7870,7 +9078,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files: https://core.telegram.org/bots/api#sending-files"
+          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "caption",
@@ -7926,7 +9134,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. Pass True, if the uploaded video is suitable for streaming"
+          "description": "Optional. Pass True if the uploaded video is suitable for streaming"
         }
       ],
       "subtype_of": [
@@ -7954,7 +9162,7 @@
             "String"
           ],
           "required": true,
-          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More info on Sending Files: https://core.telegram.org/bots/api#sending-files"
+          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "thumb",
@@ -7963,7 +9171,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files: https://core.telegram.org/bots/api#sending-files"
+          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "caption",
@@ -8039,7 +9247,7 @@
             "String"
           ],
           "required": true,
-          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More info on Sending Files: https://core.telegram.org/bots/api#sending-files"
+          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "thumb",
@@ -8048,7 +9256,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files: https://core.telegram.org/bots/api#sending-files"
+          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "caption",
@@ -8124,7 +9332,7 @@
             "String"
           ],
           "required": true,
-          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More info on Sending Files: https://core.telegram.org/bots/api#sending-files"
+          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "thumb",
@@ -8133,7 +9341,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More info on Sending Files: https://core.telegram.org/bots/api#sending-files"
+          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "caption",
@@ -8203,6 +9411,14 @@
           "description": "Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file."
         },
         {
+          "name": "type",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Type of the sticker, currently one of \"regular\", \"mask\", \"custom_emoji\". The type of the sticker is independent from its format, which is determined by the fields is_animated and is_video."
+        },
+        {
           "name": "width",
           "types": [
             "Integer"
@@ -8259,12 +9475,28 @@
           "description": "Optional. Name of the sticker set to which the sticker belongs"
         },
         {
+          "name": "premium_animation",
+          "types": [
+            "File"
+          ],
+          "required": false,
+          "description": "Optional. For premium regular stickers, premium animation for the sticker"
+        },
+        {
           "name": "mask_position",
           "types": [
             "MaskPosition"
           ],
           "required": false,
           "description": "Optional. For mask stickers, the position where the mask should be placed"
+        },
+        {
+          "name": "custom_emoji_id",
+          "types": [
+            "String"
+          ],
+          "required": false,
+          "description": "Optional. For custom emoji stickers, unique identifier of the custom emoji"
         },
         {
           "name": "file_size",
@@ -8300,6 +9532,14 @@
           "description": "Sticker set title"
         },
         {
+          "name": "sticker_type",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Type of stickers in the set, currently one of \"regular\", \"mask\", \"custom_emoji\""
+        },
+        {
           "name": "is_animated",
           "types": [
             "Boolean"
@@ -8314,14 +9554,6 @@
           ],
           "required": true,
           "description": "True, if the sticker set contains video stickers"
-        },
-        {
-          "name": "contains_masks",
-          "types": [
-            "Boolean"
-          ],
-          "required": true,
-          "description": "True, if the sticker set contains masks"
         },
         {
           "name": "stickers",
@@ -8427,7 +9659,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. Type of the chat, from which the inline query was sent. Can be either \"sender\" for a private chat with the inline query sender, \"private\", \"group\", \"supergroup\", or \"channel\". The chat type should be always known for requests sent from official clients and most third-party clients, unless the request was sent from a secret chat"
+          "description": "Optional. Type of the chat from which the inline query was sent. Can be either \"sender\" for a private chat with the inline query sender, \"private\", \"group\", \"supergroup\", or \"channel\". The chat type should be always known for requests sent from official clients and most third-party clients, unless the request was sent from a secret chat"
         },
         {
           "name": "location",
@@ -8550,7 +9782,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. Pass True, if you don't want the URL to be shown in the message"
+          "description": "Optional. Pass True if you don't want the URL to be shown in the message"
         },
         {
           "name": "description",
@@ -8858,7 +10090,7 @@
             "String"
           ],
           "required": true,
-          "description": "A valid URL for the MP4 file. File size must not exceed 1MB"
+          "description": "A valid URL for the MPEG4 file. File size must not exceed 1MB"
         },
         {
           "name": "mpeg4_width",
@@ -8990,7 +10222,7 @@
             "String"
           ],
           "required": true,
-          "description": "Mime type of the content of video url, \"text/html\" or \"video/mp4\""
+          "description": "MIME type of the content of the video URL, \"text/html\" or \"video/mp4\""
         },
         {
           "name": "thumb_url",
@@ -9349,7 +10581,7 @@
             "String"
           ],
           "required": true,
-          "description": "Mime type of the content of the file, either \"application/pdf\" or \"application/zip\""
+          "description": "MIME type of the content of the file, either \"application/pdf\" or \"application/zip\""
         },
         {
           "name": "description",
@@ -10013,7 +11245,7 @@
             "String"
           ],
           "required": true,
-          "description": "A valid file identifier for the MP4 file"
+          "description": "A valid file identifier for the MPEG4 file"
         },
         {
           "name": "title",
@@ -10748,7 +11980,7 @@
             "String"
           ],
           "required": true,
-          "description": "Payment provider token, obtained via Botfather"
+          "description": "Payment provider token, obtained via @BotFather"
         },
         {
           "name": "currency",
@@ -10796,7 +12028,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service. People like it better when they see what they are paying for."
+          "description": "Optional. URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service."
         },
         {
           "name": "photo_size",
@@ -10804,7 +12036,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. Photo size"
+          "description": "Optional. Photo size in bytes"
         },
         {
           "name": "photo_width",
@@ -10828,7 +12060,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. Pass True, if you require the user's full name to complete the order"
+          "description": "Optional. Pass True if you require the user's full name to complete the order"
         },
         {
           "name": "need_phone_number",
@@ -10836,7 +12068,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. Pass True, if you require the user's phone number to complete the order"
+          "description": "Optional. Pass True if you require the user's phone number to complete the order"
         },
         {
           "name": "need_email",
@@ -10844,7 +12076,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. Pass True, if you require the user's email address to complete the order"
+          "description": "Optional. Pass True if you require the user's email address to complete the order"
         },
         {
           "name": "need_shipping_address",
@@ -10852,7 +12084,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. Pass True, if you require the user's shipping address to complete the order"
+          "description": "Optional. Pass True if you require the user's shipping address to complete the order"
         },
         {
           "name": "send_phone_number_to_provider",
@@ -10860,7 +12092,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. Pass True, if user's phone number should be sent to provider"
+          "description": "Optional. Pass True if the user's phone number should be sent to provider"
         },
         {
           "name": "send_email_to_provider",
@@ -10868,7 +12100,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. Pass True, if user's email address should be sent to provider"
+          "description": "Optional. Pass True if the user's email address should be sent to provider"
         },
         {
           "name": "is_flexible",
@@ -10876,7 +12108,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. Pass True, if the final price depends on the shipping method"
+          "description": "Optional. Pass True if the final price depends on the shipping method"
         }
       ],
       "subtype_of": [
@@ -10888,7 +12120,7 @@
       "href": "https://core.telegram.org/bots/api#choseninlineresult",
       "description": [
         "Represents a result of an inline query that was chosen by the user and sent to their chat partner.",
-        "Note: It is necessary to enable inline feedback via @Botfather in order to receive these objects in updates."
+        "Note: It is necessary to enable inline feedback via @BotFather in order to receive these objects in updates."
       ],
       "fields": [
         {
@@ -10930,6 +12162,23 @@
           ],
           "required": true,
           "description": "The query that was used to obtain the result"
+        }
+      ]
+    },
+    "SentWebAppMessage": {
+      "name": "SentWebAppMessage",
+      "href": "https://core.telegram.org/bots/api#sentwebappmessage",
+      "description": [
+        "Describes an inline message sent by a Web App on behalf of a user."
+      ],
+      "fields": [
+        {
+          "name": "inline_message_id",
+          "types": [
+            "String"
+          ],
+          "required": false,
+          "description": "Optional. Identifier of the sent inline message. Available only if there is an inline keyboard attached to the message."
         }
       ]
     },
@@ -11020,7 +12269,7 @@
             "String"
           ],
           "required": true,
-          "description": "ISO 3166-1 alpha-2 country code"
+          "description": "Two-letter ISO 3166-1 alpha-2 country code"
         },
         {
           "name": "state",
@@ -11183,7 +12432,7 @@
             "OrderInfo"
           ],
           "required": false,
-          "description": "Optional. Order info provided by the user"
+          "description": "Optional. Order information provided by the user"
         },
         {
           "name": "telegram_payment_charge_id",
@@ -11305,7 +12554,7 @@
             "OrderInfo"
           ],
           "required": false,
-          "description": "Optional. Order info provided by the user"
+          "description": "Optional. Order information provided by the user"
         }
       ]
     },
@@ -11313,7 +12562,7 @@
       "name": "PassportData",
       "href": "https://core.telegram.org/bots/api#passportdata",
       "description": [
-        "Contains information about Telegram Passport data shared with the bot by the user."
+        "Describes Telegram Passport data shared with the bot by the user."
       ],
       "fields": [
         {
@@ -11379,7 +12628,7 @@
       "name": "EncryptedPassportElement",
       "href": "https://core.telegram.org/bots/api#encryptedpassportelement",
       "description": [
-        "Contains information about documents or other Telegram Passport elements shared with the bot by the user."
+        "Describes documents or other Telegram Passport elements shared with the bot by the user."
       ],
       "fields": [
         {
@@ -11468,7 +12717,7 @@
       "name": "EncryptedCredentials",
       "href": "https://core.telegram.org/bots/api#encryptedcredentials",
       "description": [
-        "Contains data required for decrypting and authenticating EncryptedPassportElement. See the Telegram Passport Documentation for a complete description of the data decryption and authentication processes."
+        "Describes data required for decrypting and authenticating EncryptedPassportElement. See the Telegram Passport Documentation for a complete description of the data decryption and authentication processes."
       ],
       "fields": [
         {
