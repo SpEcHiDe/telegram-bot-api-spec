@@ -510,7 +510,7 @@ documentAttributeVideo#ef02ce6 flags:# round_message:flags.0?true supports_strea
 documentAttributeAudio#9852f9c6 flags:# voice:flags.10?true duration:int title:flags.0?string performer:flags.1?string waveform:flags.2?bytes = DocumentAttribute;
 documentAttributeFilename#15590068 file_name:string = DocumentAttribute;
 documentAttributeHasStickers#9801d2f7 = DocumentAttribute;
-documentAttributeCustomEmoji#fd149899 flags:# free:flags.0?true alt:string stickerset:InputStickerSet = DocumentAttribute;
+documentAttributeCustomEmoji#fd149899 flags:# free:flags.0?true text_color:flags.1?true alt:string stickerset:InputStickerSet = DocumentAttribute;
 
 messages.stickersNotModified#f1749a22 = messages.Stickers;
 messages.stickers#30a6ec7e hash:long stickers:Vector<Document> = messages.Stickers;
