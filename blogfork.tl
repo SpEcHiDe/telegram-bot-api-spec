@@ -1381,8 +1381,6 @@ premiumGiftOption#74c34319 flags:# months:int currency:string amount:long bot_ur
 
 paymentFormMethod#88f8f21b url:string title:string = PaymentFormMethod;
 
-bots.premiumGiftsOptions#af0433d name:string gifts:Vector<PremiumGiftOption> = bots.PremiumGiftsOptions;
-
 emojiStatusEmpty#2de11aae = EmojiStatus;
 emojiStatus#929b619d document_id:long = EmojiStatus;
 emojiStatusUntil#fa30a8c7 document_id:long until:int = EmojiStatus;
