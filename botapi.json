@@ -10669,7 +10669,7 @@
           "description": "Type of the reaction, always \"custom_emoji\""
         },
         {
-          "name": "custom_emoji",
+          "name": "custom_emoji_id",
           "types": [
             "String"
           ],
