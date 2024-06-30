@@ -3,7 +3,7 @@
 	<title>Type Language Differ</title>
 	<link href="https://telegramplayground.github.io/TG-APIs/TL/diff/atom.xml" rel="self" type="application/atom+xml"/>
     <link href="https://telegramplayground.github.io/TG-APIs/TL/diff/"/>
-    <updated>2024-05-30T17:35:08+00:00</updated>
+    <updated>2024-06-30T17:16:11+00:00</updated>
     <id>https://telegramplayground.github.io/TG-APIs/TL/diff/atom.xml</id><entry xml:lang="en">
         <title>Layer 15</title>
         <published>2014-05-30T08:53:19+00:00</published>
@@ -2999,6 +2999,42 @@
         <link href="https://telegramplayground.github.io/TG-APIs/TL/diff/" type="text/html"/>
         <id>https://telegramplayground.github.io/TG-APIs/TL/diff/1717090508</id>
         <content type="html">&lt;p&gt;0 added, 0 removed, 2 changed&lt;/p&gt;</content>
+        <author><name>TL Differ Team</name></author>
+    </entry>
+<entry xml:lang="en">
+        <title>Layer 182</title>
+        <published>2024-06-30T17:16:07+00:00</published>
+        <updated>2024-06-30T17:16:07+00:00</updated>
+        <link href="https://telegramplayground.github.io/TG-APIs/TL/diff/" type="text/html"/>
+        <id>https://telegramplayground.github.io/TG-APIs/TL/diff/1719767767</id>
+        <content type="html">&lt;p&gt;12 added, 0 removed, 6 changed&lt;/p&gt;</content>
+        <author><name>TL Differ Team</name></author>
+    </entry>
+<entry xml:lang="en">
+        <title>Layer 183</title>
+        <published>2024-06-30T17:16:08+00:00</published>
+        <updated>2024-06-30T17:16:08+00:00</updated>
+        <link href="https://telegramplayground.github.io/TG-APIs/TL/diff/" type="text/html"/>
+        <id>https://telegramplayground.github.io/TG-APIs/TL/diff/1719767768</id>
+        <content type="html">&lt;p&gt;5 added, 0 removed, 2 changed&lt;/p&gt;</content>
+        <author><name>TL Differ Team</name></author>
+    </entry>
+<entry xml:lang="en">
+        <title>Layer 183 Revision 2</title>
+        <published>2024-06-30T17:16:10+00:00</published>
+        <updated>2024-06-30T17:16:10+00:00</updated>
+        <link href="https://telegramplayground.github.io/TG-APIs/TL/diff/" type="text/html"/>
+        <id>https://telegramplayground.github.io/TG-APIs/TL/diff/1719767770</id>
+        <content type="html">&lt;p&gt;2 added, 0 removed, 2 changed&lt;/p&gt;</content>
+        <author><name>TL Differ Team</name></author>
+    </entry>
+<entry xml:lang="en">
+        <title>Layer 183 Revision 3</title>
+        <published>2024-06-30T17:16:11+00:00</published>
+        <updated>2024-06-30T17:16:11+00:00</updated>
+        <link href="https://telegramplayground.github.io/TG-APIs/TL/diff/" type="text/html"/>
+        <id>https://telegramplayground.github.io/TG-APIs/TL/diff/1719767771</id>
+        <content type="html">&lt;p&gt;0 added, 2 removed, 4 changed&lt;/p&gt;</content>
         <author><name>TL Differ Team</name></author>
     </entry>
 </feed>
