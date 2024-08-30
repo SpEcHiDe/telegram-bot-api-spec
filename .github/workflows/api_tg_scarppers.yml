@@ -26,5 +26,5 @@ jobs:
     - name: scrape preparations
       run: |
           pip install --upgrade pip setuptools wheel
-          wget https://github.com/TelegramPlayGround/TG-APIs/raw/935d4e0/deploy.sh -O deploy.sh
+          wget https://github.com/TelegramPlayGround/TG-APIs/raw/d4b97e2/deploy.sh -O deploy.sh
           bash deploy.sh
