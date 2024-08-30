@@ -60,10 +60,10 @@ cd "${a}"
 # there's probably better ways but we know none has spaces
 rm -rf /tmp/Telethon/
 cd "${a}/Telegram/"
-git config --global user.email "totufals@hotmail.com"
+git config --global user.email "Lonami@users.noreply.github.com"
 git config --global user.name "GitHub Action <Lonami Exo>"
 git add constructors/ types/ methods/ index.html 404.html js/search.js css/ img/
-git commit -m "Update documentation"
+git commit -m "Update Telethon docs"
 cd "${a}"
 
 git clone https://github.com/Lonami/tl-differ /tmp/tldiff/
@@ -95,6 +95,6 @@ rm -rf /tmp/tldiff/
 git add TL -A
 git config --global user.email "Lonami@users.noreply.github.com"
 git config --global user.name "GitHub Action <Lonami Exo> | GitHub Action <John Preston>"
-git commit -m "Update new Layer Diff"
+git commit -m "Update new TL Layer diff.telethon.dev"
 
 git push origin data
