@@ -12,8 +12,8 @@ TG_CORE_TYPES = ["String", "Boolean", "Integer", "Float"]
 ROOT_URL = ""
 TO_SCRAPE = {
     "botapi": "https" + "://" + "core.telegram.org" + "/bots/api",
-    "botapiblogfork": "https" + "://" + "blogfork.telegram.org" + "/bots/api",
-    "botapicorefork": "https" + "://" + "corefork.telegram.org" + "/bots/api",
+    # "botapiblogfork": "https" + "://" + "blogfork.telegram.org" + "/bots/api",
+    # "botapicorefork": "https" + "://" + "corefork.telegram.org" + "/bots/api",
 }
 
 METHODS = "methods"
@@ -349,7 +349,7 @@ def verify_method_parameters(items: dict) -> bool:
 
             if ret not in items[TYPES] and ret not in TG_CORE_TYPES:
                 issue_found = True
-                print("UNKNOWN RETURN TYPE", ret)
+                print("UNKNOWN RETURN TYPE", ret, "in method", method)
 
     return issue_found
 

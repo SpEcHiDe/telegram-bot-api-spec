@@ -27,25 +27,25 @@ node bin.js tdlib.tl tdlib.json
 
 git checkout data
 
+git config --global user.email "igor.beatle@gmail.com"
+git config --global user.name "GitHub Action <Igor Zhukov>"
+git add botapi.json botapi.min.json # botapiblogfork.json botapiblogfork.min.json botapicorefork.json botapicorefork.min.json
+git commit -m "update BOT API docs"
+
 git config --global user.email "johnprestonmail@gmail.com"
 git config --global user.name "GitHub Action <John Preston>"
 git add tdesktop.tl tdesktop.json
 git commit -m "update tDesktop API scheme"
-
-git config --global user.email "durov2005@gmail.com"
-git config --global user.name "GitHub Action <Pavel Durov>"
-git add core.tl core.json corefork.tl corefork.json blogfork.tl blogfork.json
-git commit -m "update OW (3) API scheme"
 
 git config --global user.email "levlam@telegram.org"
 git config --global user.name "GitHub Action <Aliaksei Levin>"
 git add tdlib.tl tdlib.json
 git commit -m "update TDLib API scheme"
 
-git config --global user.email "igor.beatle@gmail.com"
-git config --global user.name "GitHub Action <Igor Zhukov>"
-git add botapi.json botapi.min.json botapiblogfork.json botapiblogfork.min.json botapicorefork.json botapicorefork.min.json
-git commit -m "update BOT API docs"
+git config --global user.email "durov2005@gmail.com"
+git config --global user.name "GitHub Action <Pavel Durov>"
+git add core.tl core.json corefork.tl corefork.json blogfork.tl blogfork.json
+git commit -m "update OW (3) API scheme"
 
 git clone https://github.com/LonamiWebs/Telethon /tmp/Telethon/
 a=$(pwd)
