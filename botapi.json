@@ -18109,7 +18109,7 @@
         {
           "name": "gift",
           "types": [
-            "String"
+            "Gift"
           ],
           "required": false,
           "description": "Optional. The gift sent to the user by the bot"
