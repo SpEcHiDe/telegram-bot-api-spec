@@ -23,7 +23,13 @@ messages.updateDialogFilter#1ad4a04a flags:# id:<a href="../../index.html#int">i
         id=42,
         filter=types.DialogFilter(
             id=42,
-            title=<em>'My awesome title'</em>,
+            title=types.TextWithEntities(
+                text=<em>'some string here'</em>,
+                entities=[types.MessageEntityUnknown(
+                    offset=42,
+                    length=42
+                )]
+            ),
             pinned_peers=[<em>'username'</em>],
             include_peers=[<em>'username'</em>],
             exclude_peers=[<em>'username'</em>],
@@ -35,6 +41,7 @@ messages.updateDialogFilter#1ad4a04a flags:# id:<a href="../../index.html#int">i
             exclude_muted=<strong>True</strong>,
             exclude_read=<strong>True</strong>,
             exclude_archived=<strong>True</strong>,
+            title_noanimate=<strong>True</strong>,
             emoticon=<em>'some string here'</em>,
             color=42
         )
