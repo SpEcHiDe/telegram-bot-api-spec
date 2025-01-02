@@ -3,7 +3,7 @@
 	<title>Type Language Differ</title>
 	<link href="https://telegramplayground.github.io/TG-APIs/TL/diff/atom.xml" rel="self" type="application/atom+xml"/>
     <link href="https://telegramplayground.github.io/TG-APIs/TL/diff/"/>
-    <updated>2024-12-04T09:51:18+00:00</updated>
+    <updated>2024-12-31T09:12:15+00:00</updated>
     <id>https://telegramplayground.github.io/TG-APIs/TL/diff/atom.xml</id><entry xml:lang="en">
         <title>Layer 15</title>
         <published>2014-05-30T08:53:19+00:00</published>
@@ -3188,6 +3188,24 @@
         <link href="https://telegramplayground.github.io/TG-APIs/TL/diff/" type="text/html"/>
         <id>https://telegramplayground.github.io/TG-APIs/TL/diff/1733305878</id>
         <content type="html">&lt;p&gt;15 added, 1 removed, 9 changed&lt;/p&gt;</content>
+        <author><name>TL Differ Team</name></author>
+    </entry>
+<entry xml:lang="en">
+        <title>Layer 196</title>
+        <published>2024-12-25T07:09:35+00:00</published>
+        <updated>2024-12-25T07:09:35+00:00</updated>
+        <link href="https://telegramplayground.github.io/TG-APIs/TL/diff/" type="text/html"/>
+        <id>https://telegramplayground.github.io/TG-APIs/TL/diff/1735110575</id>
+        <content type="html">&lt;p&gt;15 added, 0 removed, 21 changed&lt;/p&gt;</content>
+        <author><name>TL Differ Team</name></author>
+    </entry>
+<entry xml:lang="en">
+        <title>Layer 196 Revision 2</title>
+        <published>2024-12-31T09:12:15+00:00</published>
+        <updated>2024-12-31T09:12:15+00:00</updated>
+        <link href="https://telegramplayground.github.io/TG-APIs/TL/diff/" type="text/html"/>
+        <id>https://telegramplayground.github.io/TG-APIs/TL/diff/1735636335</id>
+        <content type="html">&lt;p&gt;9 added, 2 removed, 16 changed&lt;/p&gt;</content>
         <author><name>TL Differ Team</name></author>
     </entry>
 </feed>
